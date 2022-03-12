@@ -1,6 +1,6 @@
 import './App.css';
 import CurrentWinner from './CurrentWinner'
-import PokemonGrid from './PokemonGrid';
+import PokemonGrid from './PokemonGrid'
 
 function App() {
   return (
