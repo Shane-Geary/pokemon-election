@@ -1,5 +1,6 @@
 import './App.css';
-import CurrentWinner from './CurrentWinner';
+import CurrentWinner from './CurrentWinner'
+import PokemonGrid from './PokemonGrid';
 
 function App() {
   return (
@@ -7,11 +8,15 @@ function App() {
       <h1>
         Pokemon Election
       </h1>
-      <div className='header-line'>
+      <div className='header-line'/>
+      <div>
         <CurrentWinner/>
+      </div>
+      <div>
+        <PokemonGrid/>
       </div>
     </div>
   )
 }
 
-export default App;
+export default App
