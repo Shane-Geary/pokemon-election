@@ -1,12 +1,17 @@
+html body {
+	height: 100%;
+}
+
 .App {
   text-align: center;
 }
 
 /* h1 {
-  
+	position: fixed;
 } */
 
 .header-line {
+	/* position; */
   height: 5px;
   width: 100%;
   background-color: black;
@@ -27,6 +32,20 @@
 	border-color: darkgoldenrod;
 	margin-left: 10px;
 	/* z-index: ; */
+}
+
+.background-wrapper {
+	background: url(/src/imgaes/kantoMap.webp);
+	/* background: linear-gradient(
+		to right, #AF2BBF 0%, #49B6FF 100%); */
+	min-height: 100%;
+	min-width: 100%;
+
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	overflow: scroll;
 }
 
 .structure-flex {

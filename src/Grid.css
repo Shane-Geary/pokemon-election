@@ -19,6 +19,7 @@
 .grass {
 	background-image: linear-gradient(
 		to right, #00bd19 0%, #fffc46 100%);
+		/* opacity: 80%;*/
 }
 
 .ground {
@@ -93,7 +94,7 @@
 	border-radius: 25px;
 	z-index: 0;
 	overflow: hidden;
-	/* border: 1px solid; */
+	opacity: 90%;
 }
 
 .poke-card-wrapper {
