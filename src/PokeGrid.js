@@ -1,10 +1,11 @@
+import { useState } from 'react';
 import './Grid.css'
 import { useQuery } from "react-query"
 
 function PokeGrid() {
 
     const getPokemons = async () => {
-        const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=20")
+        const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=150")
         const data = await response.json()
       
         return data
@@ -18,6 +19,14 @@ function PokeGrid() {
       };
       
       const PokemonTile = ({ name, url }) => {
+
+        const [votes, setVotes] = useState(0)
+
+        const handleVote = () => {
+            setVotes(votes + 1)
+            console.log(votes)
+          }
+
         const { error, isLoading, data } = useQuery(`pokemon${name}`, () =>
           getPokemon(url)
         )
@@ -71,7 +80,12 @@ function PokeGrid() {
                 <div>
                     <small className='poke-id'>id: {index}</small>
                 </div>
-                <img src={front_default} alt={name} />
+                <div className='poke-total-votes'>
+                    {votes}
+                </div>
+                <div className='poke-sprite'>
+                    <img src={front_default} alt={name} />
+                </div>
                 <div>
                     {name.toUpperCase()}
                 </div>
@@ -81,9 +95,12 @@ function PokeGrid() {
                 <div>
                     Ability: {ability}
                 </div>
-                <div>
+                {/* <div>
                     Attack: {attack}
-                </div>
+                </div> */}
+                <button onClick={handleVote}>
+                    VOTE
+                </button>
             </div>
         );
       };
