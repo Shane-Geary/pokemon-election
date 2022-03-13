@@ -4,3 +4,7 @@
   	gap: 10px;
 	grid-auto-rows: minmax(50px, 350px);
 }
+
+.id1 {
+	grid-template-columns: repeat(1, 4);
+}

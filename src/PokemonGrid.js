@@ -61,16 +61,12 @@ function PokemonGrid() {
 
     return (
         <div>
-            <div className='grid-wrapper'>
-                <div className='id1'>
-                    <div>
+                    <div className='grid-wrapper'>
                     {pokemons.map((pokemon) => (
-                        <PokemonTile key={pokemon.name} {...pokemon} />
+                            <PokemonTile key={pokemon.name} {...pokemon} />
                     ))}
                     </div>
                 </div>
-            </div>
-        </div>
     )
 }
 
