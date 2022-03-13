@@ -9,13 +9,10 @@ const ACTIONS = {
 
 // We set isLoading to true initially,
 // this way we won't get data as undefined
-// on the first render. You can adjust
+// on the first render. Adjust
 // initialState as you need, just remember
 // about handling the undefined case for data
 
-// Alternative way would be to set initial data,
-// different than undefined, and still have isLoading
-// as false initially
 const createInitialState = (initialState) => ({
   error: undefined,
   isLoading: true,

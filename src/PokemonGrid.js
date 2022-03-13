@@ -33,13 +33,27 @@ function PokemonGrid() {
           )
         }
       
+        // const {
+        //   sprites: {
+        //       other: {
+        //           'official-artwork': { front_default }
+        //       }
+        //   }
+        // } = data
+
         const {
-          sprites: { front_default }
+            sprites: { front_default }
         } = data
 
         const {
             types: [{
                 type: { name: type }
+            }]
+        } = data
+
+        const {
+            abilities: [{
+                ability: { name: ability }
             }]
         } = data
       
@@ -51,6 +65,9 @@ function PokemonGrid() {
                 </div>
                 <div>
                     Type: {type}
+                </div>
+                <div>
+                    Ability: {ability}
                 </div>
             </div>
         );
