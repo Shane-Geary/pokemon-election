@@ -2,9 +2,9 @@
   text-align: center;
 }
 
-h1 {
+/* h1 {
   
-}
+} */
 
 .header-line {
   height: 5px;
@@ -18,7 +18,7 @@ h1 {
 	background-color: rgba(0, 0, 0, 0.32);
 	width: 350px;
 	height: 1000px;
-	position: absolute;
+	position: fixed;
 	top: 200px;
 	right: 75px;
 	opacity: 50%;
@@ -32,7 +32,7 @@ h1 {
 .structure-flex {
 	display: flex;
 	border: 5px solid rgba(255, 255, 255, 0);
-	height: 90vh;
+	height: 100vh;
 }
 
 .box1 {
