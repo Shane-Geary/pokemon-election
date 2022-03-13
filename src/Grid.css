@@ -3,8 +3,19 @@
     grid-template-columns: repeat(4, 1fr);
   	gap: 10px;
 	grid-auto-rows: minmax(50px, 350px);
+	margin-top: 50px;
 }
 
-.id1 {
-	grid-template-columns: repeat(1, 4);
+.poke-card-wrapper {
+	display: flex;
+	justify-content: center;
+}
+
+.poke-card {
+	width: 80%;
+	height: 90%;
+	border: 5px solid;
+	border-radius: 60px;
+	display: flex;
+	justify-content: center;
 }

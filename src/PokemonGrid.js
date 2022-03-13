@@ -21,7 +21,7 @@ function PokemonGrid() {
       const PokemonTile = ({ name, url }) => {
         const { error, isLoading, data } = useQuery(`pokemon${name}`, () =>
           getPokemon(url)
-        );
+        )
       
         if (error) {
           return <div>Error: {error}</div>
@@ -30,17 +30,28 @@ function PokemonGrid() {
         if (isLoading) {
           return (
             <div>Loading...</div>
-          );
+          )
         }
       
         const {
           sprites: { front_default }
-        } = data;
+        } = data
+
+        const {
+            types: [{
+                type: { name: type }
+            }]
+        } = data
       
         return (
             <div>
                 <img src={front_default} alt={name} />
-                <div></div>
+                <div>
+                    {name.toUpperCase()}
+                </div>
+                <div>
+                    Type: {type}
+                </div>
             </div>
         );
       };
@@ -61,12 +72,16 @@ function PokemonGrid() {
 
     return (
         <div>
-                    <div className='grid-wrapper'>
-                    {pokemons.map((pokemon) => (
-                            <PokemonTile key={pokemon.name} {...pokemon} />
-                    ))}
+            <div className='grid-wrapper'>
+            {pokemons.map((pokemon) => (
+                <div className='poke-card-wrapper'>
+                    <div key={pokemon.name} className='poke-card'>
+                        <PokemonTile {...pokemon} />
                     </div>
                 </div>
+            ))}
+            </div>
+        </div>
     )
 }
 
