@@ -74,9 +74,11 @@ function PokeGrid() {
                 move: { name: attack }
             }]
         } = data
+
+        const style = `type-styler ${type}`
       
         return (
-            <div>
+            <div className={style}>
                 <div>
                     <small className='poke-id'>id: {index}</small>
                 </div>
@@ -123,8 +125,8 @@ function PokeGrid() {
         <div>
             <div className='grid-wrapper'>
             {pokemons.map((pokemon) => (
-                <div className='poke-card-wrapper'>
-                    <div key={pokemon.name} className='poke-card'>
+                <div key={pokemon.name} className='poke-card-wrapper'>
+                    <div className='poke-card'>
                         <PokemonTile {...pokemon} />
                     </div>
                 </div>
