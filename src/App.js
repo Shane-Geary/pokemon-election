@@ -1,6 +1,6 @@
 import './App.css';
 import CurrentWinner from './CurrentWinner'
-import PokemonGrid from './PokemonGrid'
+import PokeGrid from './PokeGrid'
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <div className='header-line'/>
       <div className='structure-flex'>
         <div className='box1'>
-          <PokemonGrid/>
+          <PokeGrid/>
         </div>
         <div className='box2'>
           <CurrentWinner/>

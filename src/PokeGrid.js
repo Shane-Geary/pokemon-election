@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react'
 import './Grid.css'
 import { useQuery } from "react-query"
 
-function PokemonGrid() {
+function PokeGrid() {
 
     const getPokemons = async () => {
         const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=20")
@@ -42,6 +41,10 @@ function PokemonGrid() {
         // } = data
 
         const {
+            id: index
+        } = data
+
+        const {
             sprites: { front_default }
         } = data
 
@@ -56,9 +59,18 @@ function PokemonGrid() {
                 ability: { name: ability }
             }]
         } = data
+
+        const {
+            moves: [{
+                move: { name: attack }
+            }]
+        } = data
       
         return (
             <div>
+                <div>
+                    <small className='poke-id'>id: {index}</small>
+                </div>
                 <img src={front_default} alt={name} />
                 <div>
                     {name.toUpperCase()}
@@ -68,6 +80,9 @@ function PokemonGrid() {
                 </div>
                 <div>
                     Ability: {ability}
+                </div>
+                <div>
+                    Attack: {attack}
                 </div>
             </div>
         );
@@ -102,4 +117,4 @@ function PokemonGrid() {
     )
 }
 
-export default PokemonGrid
+export default PokeGrid
