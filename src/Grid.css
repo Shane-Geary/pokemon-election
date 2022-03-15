@@ -29,7 +29,7 @@
 
 .normal {
 	background-image: linear-gradient(
-		to right, #ffe6fa 0%, #e3fdf5 100%);
+		to right, #ffd4f6 0%, #e3fdf5 100%);
 }
 
 .rock {
@@ -54,7 +54,7 @@
 	
 .electric {
 	background-image: linear-gradient(
-		to right, #ffd000 0%, #c8ff00 100%);
+		to right, #fbff00 0%, #3772FF 100%);
 }
 
 .ice {
@@ -78,7 +78,7 @@
 
 .fighting {
 	background-image: linear-gradient(
-		to right, #6320EE 0%, #ECD444 100%
+		to right, #202eee 0%, #ECD444 100%
 	);
 }
 
@@ -94,7 +94,7 @@
 	border-radius: 25px;
 	z-index: 0;
 	overflow: hidden;
-	opacity: 90%;
+	/* opacity: 90%; */
 }
 
 .poke-card-wrapper {

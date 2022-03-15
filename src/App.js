@@ -6,9 +6,9 @@ function App() {
   return (
     <div className="App">
         <div className='title'>
-        <h1>
-          Pokemon Election
-        </h1>
+          <h1>
+            Pokemon Election
+          </h1>
         <div className='header-line'/>
       </div>
       <div className='background-wrapper'>
