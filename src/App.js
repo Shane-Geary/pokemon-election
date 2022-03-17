@@ -11,16 +11,7 @@ function App() {
           </h1>
         <div className='header-line'/>
       </div>
-      <div className='background-wrapper'>
-        <div className='structure-flex'>
-          <div className='box1'>
-            <PokeGrid/>
-          </div>
-          <div className='box2'>
-            <CurrentWinner/>
-          </div>
-        </div>
-      </div>
+      <PokeGrid />
     </div>
   )
 }

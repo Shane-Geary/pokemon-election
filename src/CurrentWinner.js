@@ -1,10 +1,11 @@
 import './App.css'
+import PokeGrid from './PokeGrid'
 
 function CurrentWinner() {
 
-    const mostVoted = pokemon.reduce((prev, current) => {
-        return (prev.pokemon > current.pokemon) ? prev : current
-    })
+    // const mostVoted = pokemon.reduce((prev, current) => {
+    //     return (prev.pokemon > current.pokemon) ? prev : current
+    // })
 
     return (
         <div className='drawer-wrapper'>
@@ -12,7 +13,7 @@ function CurrentWinner() {
               Top Voted
           </div>
           <div>
-              {mostVoted}
+              {/* {mostVoted} */}
           </div>
         </div>
     )

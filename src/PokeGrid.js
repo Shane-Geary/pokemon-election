@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './Grid.css'
 import { useQuery } from "react-query"
+import CurrentWinner from './CurrentWinner';
 
 function PokeGrid() {
 
@@ -123,15 +124,26 @@ function PokeGrid() {
 
     return (
         <div>
-            <div className='grid-wrapper'>
-            {pokemons.map((pokemon) => (
-                <div key={pokemon.name} className='poke-card-wrapper'>
-                    <div className='poke-card'>
-                        <PokemonTile {...pokemon} />
-                    </div>
+            <div className='background-wrapper'>
+                <div className='structure-flex'>
+                    <div className='box1'>
+                        <div className='grid-wrapper'>
+                            {pokemons.map((pokemon) => (
+                            <div key={pokemon.name} className='poke-card-wrapper'>
+                                <div className='poke-card'>
+                                    <PokemonTile {...pokemon} />
+                                </div>
+                        
+                            </div>
+                        ))}
+                        </div>
                 </div>
-            ))}
+                <div className='box2'>
+                    <CurrentWinner/>
+                </div>
+                </div>
             </div>
+
         </div>
     )
 }
