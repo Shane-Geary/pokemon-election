@@ -7,7 +7,7 @@ function App() {
     <div className="App">
         <div className='title'>
           <h1>
-            Pokemon Election
+            Poke Fantasia
           </h1>
         <div className='header-line'/>
       </div>

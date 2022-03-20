@@ -8,14 +8,7 @@ function CurrentWinner() {
     // })
 
     return (
-        <div className='drawer-wrapper'>
-          <div>
-              Top Voted
-          </div>
-          <div>
-              {/* {mostVoted} */}
-          </div>
-        </div>
+        <div></div>
     )
 }
 

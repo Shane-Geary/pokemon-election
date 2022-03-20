@@ -5,28 +5,27 @@ import CurrentWinner from './CurrentWinner';
 
 function PokeGrid() {
 
+    const [shinySprite, setShinySprite] = useState(false)
+
     const getPokemons = async () => {
         const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=150")
         const data = await response.json()
       
         return data
-      };
+    }
       
-      const getPokemon = async (url) => {
+    const getPokemon = async (url) => {
         const response = await fetch(url)
         const data = await response.json()
-      
+        
         return data
-      };
+    }
+
+    const toggleShinySprite = () => {
+        setShinySprite(!shinySprite)
+    }
       
       const PokemonTile = ({ name, url }) => {
-
-        const [votes, setVotes] = useState(0)
-
-        const handleVote = () => {
-            setVotes(votes + 1)
-            console.log(votes)
-          }
 
         const { error, isLoading, data } = useQuery(`pokemon${name}`, () =>
           getPokemon(url)
@@ -41,17 +40,13 @@ function PokeGrid() {
             <div>Loading...</div>
           )
         }
-      
-        // const {
-        //   sprites: {
-        //       other: {
-        //           'official-artwork': { front_default }
-        //       }
-        //   }
-        // } = data
 
         const {
             id: index
+        } = data
+      
+        const {
+          sprites: { front_shiny }
         } = data
 
         const {
@@ -83,12 +78,15 @@ function PokeGrid() {
                 <div>
                     <small className='poke-id'>id: {index}</small>
                 </div>
-                <div className='poke-total-votes'>
-                    {votes}
+                {shinySprite ?
+                <div className='poke-sprite'>
+                    <img src={front_shiny} alt={name} />
                 </div>
+                : 
                 <div className='poke-sprite'>
                     <img src={front_default} alt={name} />
                 </div>
+                }
                 <div>
                     {name.toUpperCase()}
                 </div>
@@ -101,9 +99,7 @@ function PokeGrid() {
                 {/* <div>
                     Attack: {attack}
                 </div> */}
-                <button onClick={handleVote}>
-                    VOTE
-                </button>
+                <button onClick={() => console.log(data)}>DATA</button>
             </div>
         );
       };
@@ -131,15 +127,33 @@ function PokeGrid() {
                             {pokemons.map((pokemon) => (
                             <div key={pokemon.name} className='poke-card-wrapper'>
                                 <div className='poke-card'>
-                                    <PokemonTile {...pokemon} />
+                                    <PokemonTile 
+                                    {...pokemon} 
+                                    
+                                    />
                                 </div>
                         
                             </div>
                         ))}
                         </div>
                 </div>
-                <div className='box2'>
-                    <CurrentWinner/>
+                 <div className='box2'>
+                    <div className='drawer-wrapper'>
+                        <div>
+                            Welcome!
+                        </div>
+                        <div>
+                            {shinySprite ?
+                            <button onClick={toggleShinySprite}>
+                                ORIGINAL
+                            </button>
+                            :
+                            <button onClick={toggleShinySprite}>
+                                SHINY
+                            </button>
+                            }
+                        </div>
+                    </div>
                 </div>
                 </div>
             </div>
