@@ -1,7 +1,7 @@
 .grid-wrapper {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-  	gap: 10px;
+  	gap: 5px;
 	grid-auto-rows: minmax(50px, 350px);
 	margin-top: 50px;
 }
@@ -114,8 +114,8 @@
 
 .poke-id {
 	position: relative;
-	top: 10px;
-	right: 100px;
+	top: 10%;
+	right: 25%;
 }
 
 .poke-total-votes {
@@ -125,4 +125,8 @@
 
 .poke-sprite img {
 	width: 115px;
+}
+
+@media screen {
+	
 }

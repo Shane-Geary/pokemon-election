@@ -99,7 +99,7 @@ function PokeGrid() {
                 {/* <div>
                     Attack: {attack}
                 </div> */}
-                <button onClick={() => console.log(data)}>DATA</button>
+                {/* <button onClick={() => console.log(data)}>DATA</button> */}
             </div>
         );
       };
