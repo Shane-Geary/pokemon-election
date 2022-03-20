@@ -8,15 +8,20 @@ html body {
   text-align: center;
 }
 
-/* .title {
-	position: fixed;
-	top: 10px;
-	display: flex;
-	justify-content: center;
-} */
-
 h1 {
-	/* position: fixed; */
+	 margin: 0;
+}
+
+.title-wrapper {
+	/* min-width: 100%; */
+}
+
+.title {
+	background: url(/src/Gifs/Pika-Wave.gif) no-repeat;
+	background-size: 10vw;
+	width: 100vw;
+	padding-top: 50px;
+	padding-bottom: 20px;
 }
 
 .header-line {
@@ -54,7 +59,12 @@ h1 {
 	background-repeat: no-repeat;
 	background-size: cover;
 	overflow: scroll;
+	/* background: radial-gradient(circle at 90% 5%, rgba(123,123,123,1) 0%, rgba(50,50,50,1) 26%, rgba(123,123,123,1) 52%); */
 }
+
+/* .background-wrapper:active {
+	background: radial-gradient(circle at 90% 5%, rgba(123,123,123,1) 0%, rgba(50,50,50,1) 26%, rgba(123,123,123,1) 52%);
+} */
 
 .structure-flex {
 	display: flex;
@@ -70,4 +80,8 @@ h1 {
 .box2 {
 	background: rgba(255, 255, 255, 0);
     flex: 1;
+}
+
+.awesome-button {
+	background-color: yellowgreen !important;
 }
