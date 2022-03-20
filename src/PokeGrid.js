@@ -2,6 +2,8 @@ import { useState } from 'react';
 import './Grid.css'
 import { useQuery } from "react-query"
 import CurrentWinner from './CurrentWinner';
+import {AwesomeButton, AwesomeButtonProgress} from 'react-awesome-button';
+import "react-awesome-button/dist/styles.css";
 
 function PokeGrid() {
 
@@ -143,15 +145,26 @@ function PokeGrid() {
                             Welcome!
                         </div>
                         <div>
-                            {shinySprite ?
-                            <button onClick={toggleShinySprite}>
+                            {/* {shinySprite ? */}
+                            <AwesomeButton
+                            type='secondary'
+                            size='medium'
+                            ripple
+                            onPress={async() => {
+                                toggleShinySprite()
+                            }}
+                            >
                                 ORIGINAL
-                            </button>
-                            :
-                            <button onClick={toggleShinySprite}>
+                            </AwesomeButton>
+                            {/* : */}
+                            {/* <AwesomeButton 
+                            action={() => {
+                                toggleShinySprite()
+                            }}
+                            >
                                 SHINY
-                            </button>
-                            }
+                            </AwesomeButton> */}
+                            {/* } */}
                         </div>
                     </div>
                 </div>

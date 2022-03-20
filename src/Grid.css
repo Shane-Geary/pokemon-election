@@ -16,6 +16,13 @@
 		to right,#1f63f5 0%, #8ad0ff 100%);
 }
 
+.water:hover {
+	background-image: linear-gradient(
+		90deg, #1f63f5 0%, #8ad0ff 100%
+	);
+	animation: slidebg 2s linear infinite;
+}
+
 .grass {
 	background-image: linear-gradient(
 		to right, #00bd19 0%, #fffc46 100%);
@@ -88,12 +95,19 @@
 	);
 }
 
+@keyframes slidebg {
+	to {
+		background-position: 20vw;
+	}
+}
+
 .type-styler {
 	width: 100%;
 	height: 100%;
 	border-radius: 25px;
 	z-index: 0;
 	overflow: hidden;
+	cursor: pointer;
 	/* opacity: 90%; */
 }
 
