@@ -11,27 +11,51 @@
 		to right, #ff0000 0%, #ffee00 100%);
 }
 
+.fire:hover {
+	background-image: radial-gradient(
+		90deg, #ff0000 0%, #ffee00 100%
+	);
+	animation: slidebg 2s linear infinite;
+	animation-delay: 250ms;
+}
+
 .water {
 	background-image: linear-gradient(
 		to right,#1f63f5 0%, #8ad0ff 100%);
 }
 
 .water:hover {
-	background-image: linear-gradient(
+	background-image: radial-gradient(
 		90deg, #1f63f5 0%, #8ad0ff 100%
 	);
 	animation: slidebg 2s linear infinite;
+	animation-delay: 250ms;
 }
 
 .grass {
 	background-image: linear-gradient(
 		to right, #00bd19 0%, #fffc46 100%);
-		/* opacity: 80%;*/
+}
+
+.grass:hover {
+	background-image: radial-gradient(
+		90deg, #00bd19 0%, #fffc46 100%
+	);
+	animation: slidebg 2s linear infinite;
+	animation-delay: 250ms;
 }
 
 .ground {
 	background-image: linear-gradient(
-		to right, #772f1a 0%, #f2a65a 74%);
+		to right, #772f1a 0%, #f2a65a 75%);
+}
+
+.ground:hover {
+	background-image: radial-gradient(
+		90deg, #772f1a 0%, #f2a65a 75%
+	);
+	animation: slidebg 2s linear infinite;
+	animation-delay: 250ms;
 }
 
 .normal {
@@ -39,9 +63,25 @@
 		to right, #ffd4f6 0%, #e3fdf5 100%);
 }
 
+.normal:hover {
+	background-image: radial-gradient(
+		90deg, #ffd4f6 0%, #e3fdf5 100%
+	);
+	animation: slidebg 2s linear infinite;
+	animation-delay: 250ms;
+}
+
 .rock {
 	background-image: linear-gradient(
 		to right, #63768D 0%, #C1B098 90%);
+}
+
+.rock:hover {
+	background-image: radial-gradient(
+		90deg, #63768D 0%, #C1B098 90%
+	);
+	animation: slidebg 2s linear infinite;
+	animation-delay: 250ms;
 }
 
 .poison {
@@ -49,14 +89,38 @@
 		to right, #d84390 0%, #bfd9fe 100%);
 }
 
+.poison:hover{
+	background-image: radial-gradient(
+		90deg, #d84390 0%, #bfd9fe 100%
+	);
+	animation: slidebg 2s linear infinite;
+	animation-delay: 250ms;
+}
+
 .bug {
 	background-image: linear-gradient(
 		to right, #059100 0%, #fab759 100%);
 }
 
+.bug:hover {
+	background-image: radial-gradient(
+		90deg, #059100 0%, #fab759 100%
+	);
+	animation: slidebg 2s linear infinite;
+	animation-delay: 250ms;
+}
+
 .ghost {
 	background-image: linear-gradient(
 		to right, #861657 0%, #e2ebf0 100%);
+}
+
+.ghost:hover {
+	background-image: radial-gradient(
+		90deg, #861657 0%, #e2ebf0 100%
+	);
+	animation: slidebg 2s linear infinite;
+	animation-delay: 250ms;
 }
 	
 .electric {
@@ -64,14 +128,38 @@
 		to right, #fbff00 0%, #3772FF 100%);
 }
 
+.electric:hover {
+	background-image: radial-gradient(
+		90deg, #fbff00 0%, #3772FF 100%
+	);
+	animation: slidebg 2s linear infinite;
+	animation-delay: 250ms;
+}
+
 .ice {
 	background-image: linear-gradient(
 		to right, #AF2BBF 0%, #49B6FF 100%);
 }
 
+.ice:hover {
+	background-image: radial-gradient(
+		90deg, #AF2BBF 0%, #49B6FF 100%
+	);
+	animation: slidebg 2s linear infinite;
+	animation-delay: 250ms;
+}
+
 .dragon {
 	background-image: linear-gradient(
 		to right, #225560 0%, #EDF060 50%, #F0803C 100%);
+}
+
+.dragon:hover {
+	background-image: radial-gradient(
+		90deg, #225560 0%, #EDF060 50%, #F0803C 100%
+	);
+	animation: slidebg 2s linear infinite;
+	animation-delay: 250ms;
 }
 
 .fairy {
@@ -83,10 +171,29 @@
 	);
 }
 
+.fairy:hover {
+	background-image: radial-gradient(
+		90deg,
+		#ff9a9e 0%,
+		#fecfef 99%,
+		#fecfef 100%
+	);
+	animation: slidebg 2s linear infinite;
+	animation-delay: 250ms;
+}
+
 .fighting {
 	background-image: linear-gradient(
 		to right, #202eee 0%, #ECD444 100%
 	);
+}
+
+.fighting:hover {
+	background-image: radial-gradient(
+		90deg, #202eee 0%, #ECD444 100%
+	);
+	animation: slidebg 2s linear infinite;
+	animation-delay: 250ms;
 }
 
 .psychic {
@@ -95,9 +202,17 @@
 	);
 }
 
+.psychic:hover {
+	background-image: radial-gradient(
+		90deg, #AB2346 0%, #C69DD2 100%
+	);
+	animation: slidebg 2s linear infinite;
+	animation-delay: 250ms;
+}
+
 @keyframes slidebg {
 	to {
-		background-position: 20vw;
+		background-position: 15vw;
 	}
 }
 
