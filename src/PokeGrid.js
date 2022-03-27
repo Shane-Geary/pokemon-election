@@ -27,6 +27,13 @@ function PokeGrid() {
     const toggleShinySprite = () => {
         setShinySprite(!shinySprite)
     }
+
+    const handleDragStart = (e, pokemon) => {
+        console.log('dragstart div: ', pokemon)
+        e.dataTransfer.setData('pokemon', pokemon)
+    }
+
+    
       
       const PokemonTile = ({ name, url }) => {
 
@@ -129,10 +136,13 @@ function PokeGrid() {
                         <div className='grid-wrapper'>
                             {pokemons.map((pokemon) => (
                             <div key={pokemon.name} className='poke-card-wrapper'>
-                                <div className='poke-card'>
+                                <div 
+                                className='poke-card'
+                                draggable
+                                onDragStart={(e) => handleDragStart(e, pokemon)}
+                                >
                                     <PokemonTile 
                                     {...pokemon} 
-                                    
                                     />
                                 </div>
                         
@@ -141,34 +151,34 @@ function PokeGrid() {
                         </div>
                 </div>
                  <div className='box2'>
+                    <div className='shiny-btn-box'>
+                        {shinySprite ?
+                        <AwesomeButton
+                        className='awesome-button'
+                        type='secondary'
+                        size='medium'
+                        onPress={async() => {
+                            toggleShinySprite()
+                        }}
+                        >
+                            ORIGINAL
+                        </AwesomeButton>
+                        :
+                        <AwesomeButton 
+                        className='awesome-button'
+                        type='secondary'
+                        size='medium'
+                        onPress={async() => {
+                            toggleShinySprite()
+                        }}
+                        >
+                            SHINY
+                        </AwesomeButton>
+                        }
+                    </div>
                     <div className='drawer-wrapper'>
                         <div>
                             Welcome!
-                        </div>
-                        <div>
-                            {shinySprite ?
-                            <AwesomeButton
-                            className='awesome-button'
-                            type='secondary'
-                            size='medium'
-                            onPress={async() => {
-                                toggleShinySprite()
-                            }}
-                            >
-                                ORIGINAL
-                            </AwesomeButton>
-                            :
-                            <AwesomeButton 
-                            className='awesome-button'
-                            type='secondary'
-                            size='medium'
-                            onPress={async() => {
-                                toggleShinySprite()
-                            }}
-                            >
-                                SHINY
-                            </AwesomeButton>
-                            }
                         </div>
                     </div>
                 </div>
