@@ -142,12 +142,14 @@ function PokeGrid() {
                                 className='poke-card'
                                 draggable
                                 onDragStart={(e) => handleDragStart(e, pokemon)}
+                                onClick={(e) => {
+                                    
+                                }}
                                 >
                                     <PokemonTile 
                                     {...pokemon} 
                                     />
                                 </div>
-                        
                             </div>
                         ))}
                         </div>
