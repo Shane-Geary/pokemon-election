@@ -44,6 +44,7 @@ function PokeGrid() {
 
     const handleDrop = (e, pokemon) => {
         console.log(e)
+        setPokeDropped(true)
     }
       
       const PokemonTile = ({ name, url }) => {
@@ -203,9 +204,12 @@ function PokeGrid() {
                         <div>
                             Welcome!
                         </div>
+                        {pokeDropped ?
                         <div>
                             Poke1: {pokeMember.name}
                         </div>
+                        : null 
+                        }
                     </div>
                 </div>
                 </div>
