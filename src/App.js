@@ -1,6 +1,8 @@
 import './App.css';
 import CurrentWinner from './CurrentWinner'
 import PokeGrid from './PokeGrid'
+import Lottie from 'react-lottie-player'
+import PTlogo from './Lotties/PTLogo.json'
 
 function App() {
   return (
@@ -8,7 +10,12 @@ function App() {
       <div className='title-wrapper'>
         <div className='title'>
           <h1>
-            Poke Fantasia
+            {/* Poke Fantasia */}
+            <Lottie 
+            animationData={PTlogo}
+            play
+            loop={false}
+            />
           </h1>
         </div>
         <div className='header-line'/>
