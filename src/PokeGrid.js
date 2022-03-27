@@ -33,7 +33,9 @@ function PokeGrid() {
         e.dataTransfer.setData('pokemon', pokemon)
     }
 
-    
+    const handleDragOver = (e) => {
+        e.preventDefault()
+    }
       
       const PokemonTile = ({ name, url }) => {
 
@@ -176,7 +178,13 @@ function PokeGrid() {
                         </AwesomeButton>
                         }
                     </div>
-                    <div className='drawer-wrapper'>
+                    <div 
+                    className='drawer-wrapper'
+                    onDragOver={(e) => {
+                        console.log('Dragged')
+                        handleDragOver(e)
+                    }}
+                    >
                         <div>
                             Welcome!
                         </div>
