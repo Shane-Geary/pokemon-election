@@ -10,6 +10,10 @@ function PokeGrid() {
 
     const [shinySprite, setShinySprite] = useState(false)
 
+    const [pokeDropped, setPokeDropped] = useState(false)
+
+    const [pokeMember, setPokeMember] = useState([])
+
     const getPokemons = async () => {
         const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=150")
         const data = await response.json()
@@ -30,11 +34,16 @@ function PokeGrid() {
 
     const handleDragStart = (e, pokemon) => {
         console.log('dragstart div: ', pokemon)
-        e.dataTransfer.setData('pokemon', pokemon)
+        e.dataTransfer.setData('draggedPoke', pokemon)
+        setPokeMember(pokemon)
     }
 
     const handleDragOver = (e) => {
         e.preventDefault()
+    }
+
+    const handleDrop = (e, pokemon) => {
+        console.log(e)
     }
       
       const PokemonTile = ({ name, url }) => {
@@ -186,9 +195,16 @@ function PokeGrid() {
                         console.log('Dragged')
                         handleDragOver(e)
                     }}
+                    onDrop={(e) => {
+                        handleDrop(e)
+                        console.log(pokeMember)
+                    }}
                     >
                         <div>
                             Welcome!
+                        </div>
+                        <div>
+                            Poke1: {pokeMember.name}
                         </div>
                     </div>
                 </div>
