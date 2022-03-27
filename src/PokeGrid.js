@@ -35,7 +35,7 @@ function PokeGrid() {
     const handleDragStart = (e, pokemon) => {
         console.log('dragstart div: ', pokemon)
         e.dataTransfer.setData('draggedPoke', pokemon)
-        setPokeMember(pokemon)
+        pokeMember.push(pokemon)
     }
 
     const handleDragOver = (e) => {
@@ -43,8 +43,9 @@ function PokeGrid() {
     }
 
     const handleDrop = (e, pokemon) => {
-        console.log(e)
+        // console.log(e)
         setPokeDropped(true)
+        // console.log(pokemons)
     }
       
       const PokemonTile = ({ name, url }) => {
@@ -156,7 +157,7 @@ function PokeGrid() {
                                     
                                 }}
                                 >
-                                    <PokemonTile 
+                                    <PokemonTile
                                     {...pokemon} 
                                     />
                                 </div>
@@ -205,8 +206,13 @@ function PokeGrid() {
                             Welcome!
                         </div>
                         {pokeDropped ?
-                        <div>
-                            Poke1: {pokeMember.name}
+                        <div className='poke-member-container'>
+                            {pokeMember.map(({name, url}) => {
+                                <div key={name}>
+                                    {/* <PokemonTile {...poke}/> */}
+                                    <PokemonTile {...name}/>
+                                </div>
+                            })}
                         </div>
                         : null 
                         }
