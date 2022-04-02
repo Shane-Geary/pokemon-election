@@ -1,15 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './Grid.css'
 import { useQuery } from "react-query"
 // import CurrentWinner from './CurrentWinner';
 import {AwesomeButton, AwesomeButtonProgress} from 'react-awesome-button';
-// import AwesomeButtonStyles from "react-awesome-button/src/styles/styles.scss";
 import "react-awesome-button/dist/styles.css";
-import Lottie from 'react-lottie-player'
+import lottie from 'lottie-web'
+// import Lottie from 'react-lottie-player'
 import PTlogo from './Lotties/PTLogo.json'
 
 
 function PokeGrid() {
+
+    const container = useRef(null)
 
     const [shinySprite, setShinySprite] = useState(false)
 
@@ -130,6 +132,18 @@ function PokeGrid() {
         );
       };
 
+      useEffect(() => {
+        const delay = setTimeout(() => {
+            lottie.loadAnimation({
+                container: container.current,
+                animationData: PTlogo,
+                loop: false,
+                autoplay: true
+            })
+        }, [1800])
+        return () => clearTimeout(delay)
+      }, [])
+
       const { error, isLoading, data } = useQuery("pokemons", getPokemons);
 
       if (error) {
@@ -141,20 +155,35 @@ function PokeGrid() {
             <div>Loading...</div>
         )
       }
- 
+
       const { results: pokemons } = data
 
     return (
         <div>
             <div className='title-wrapper'>
                 <div className='title'>
+                    {isLoading ?
                     <h1>
-                        <Lottie 
+                        {/* <Lottie 
                         animationData={PTlogo}
                         play
                         loop={false}
-                        />
+                        /> */}
                     </h1>
+                    :
+                    <h1>
+                        <div 
+                            ref={container}
+                            // onClick={() => lottie.play()}
+                            
+                        />
+                        {/* <Lottie 
+                        animationData={PTlogo}
+                        play
+                        loop={false}
+                        /> */}
+                    </h1>
+                    }
                 </div>
                 <div className='header-line'/>
             </div>
