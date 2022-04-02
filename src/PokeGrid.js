@@ -5,6 +5,9 @@ import { useQuery } from "react-query"
 import {AwesomeButton, AwesomeButtonProgress} from 'react-awesome-button';
 // import AwesomeButtonStyles from "react-awesome-button/src/styles/styles.scss";
 import "react-awesome-button/dist/styles.css";
+import Lottie from 'react-lottie-player'
+import PTlogo from './Lotties/PTLogo.json'
+
 
 function PokeGrid() {
 
@@ -138,11 +141,23 @@ function PokeGrid() {
             <div>Loading...</div>
         )
       }
-    
+ 
       const { results: pokemons } = data
 
     return (
         <div>
+            <div className='title-wrapper'>
+                <div className='title'>
+                    <h1>
+                        <Lottie 
+                        animationData={PTlogo}
+                        play
+                        loop={false}
+                        />
+                    </h1>
+                </div>
+                <div className='header-line'/>
+            </div>
             <div className='background-wrapper'>
                 <div className='structure-flex'>
                     <div className='box1'>
