@@ -31,8 +31,8 @@ h1 {
 	background: url(/src/Gifs/Pika-Wave.gif) no-repeat;
 	background-size: 10vw;
 	width: 100vw;
-	padding-top: 25px;
-	padding-bottom: 5px;
+	/* padding-top: 25px; */
+	/* padding-bottom: 5px; */
 }
 
 .header-line {
@@ -114,4 +114,8 @@ h1 {
 	width: 50%;
 	height: 20%;
 	
+}
+
+.lottie-placeholder {
+	height: 10%;
 }

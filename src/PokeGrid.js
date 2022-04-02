@@ -102,7 +102,13 @@ function PokeGrid() {
         const style = `type-styler ${type}`
       
         return (
-            <div className={style}>
+            <div 
+            className={style}
+            onMouseEnter={(e) => {
+                // e.preventDefault()
+                // e.stopPropagation()
+            }}
+            >
                 <div>
                     <small className='poke-id'>id: {index}</small>
                 </div>
@@ -140,7 +146,7 @@ function PokeGrid() {
                 loop: false,
                 autoplay: true
             })
-        }, [1800])
+        }, [2000])
         return () => clearTimeout(delay)
       }, [])
 
@@ -163,25 +169,14 @@ function PokeGrid() {
             <div className='title-wrapper'>
                 <div className='title'>
                     {isLoading ?
-                    <h1>
-                        {/* <Lottie 
-                        animationData={PTlogo}
-                        play
-                        loop={false}
-                        /> */}
+                    <h1 className='lottie-placeholder'>
                     </h1>
                     :
                     <h1>
                         <div 
                             ref={container}
                             // onClick={() => lottie.play()}
-                            
                         />
-                        {/* <Lottie 
-                        animationData={PTlogo}
-                        play
-                        loop={false}
-                        /> */}
                     </h1>
                     }
                 </div>
@@ -197,12 +192,12 @@ function PokeGrid() {
                                 className='poke-card'
                                 draggable
                                 onDragStart={(e) => handleDragStart(e, pokemon)}
-                                onClick={(e) => {
+                                // onClick={(e) => {
                                     
-                                }}
+                                // }}
                                 >
                                     <PokemonTile
-                                    {...pokemon} 
+                                    {...pokemon}
                                     />
                                 </div>
                             </div>

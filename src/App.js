@@ -5,7 +5,6 @@ import PokeGrid from './PokeGrid'
 function App() {
   return (
     <div className="App">
-      
       <PokeGrid />
     </div>
   )
