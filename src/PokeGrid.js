@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './Grid.css'
 import { useQuery } from "react-query"
-import CurrentWinner from './CurrentWinner';
+// import CurrentWinner from './CurrentWinner';
 import {AwesomeButton, AwesomeButtonProgress} from 'react-awesome-button';
 // import AwesomeButtonStyles from "react-awesome-button/src/styles/styles.scss";
 import "react-awesome-button/dist/styles.css";

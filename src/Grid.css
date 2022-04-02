@@ -18,6 +18,7 @@
 	animation: slidebg 1.5s linear infinite;
 	animation-delay: 250ms;
 	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
 }
 
 .water {
@@ -32,6 +33,7 @@
 	animation: slidebg 1.5s linear infinite;
 	animation-delay: 250ms;
 	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
 }
 
 .grass {
@@ -46,6 +48,7 @@
 	animation: slidebg 1.5s linear infinite;
 	animation-delay: 250ms;
 	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
 }
 
 .ground {
@@ -60,6 +63,7 @@
 	animation: slidebg 1.5s linear infinite;
 	animation-delay: 250ms;
 	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
 }
 
 .normal {
@@ -74,6 +78,7 @@
 	animation: slidebg 1.5s linear infinite;
 	animation-delay: 250ms;
 	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
 }
 
 .rock {
@@ -88,6 +93,7 @@
 	animation: slidebg 1.5s linear infinite;
 	animation-delay: 250ms;
 	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
 }
 
 .poison {
@@ -102,6 +108,7 @@
 	animation: slidebg 1.5s linear infinite;
 	animation-delay: 250ms;
 	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
 }
 
 .bug {
@@ -116,6 +123,7 @@
 	animation: slidebg 1.5s linear infinite;
 	animation-delay: 250ms;
 	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
 }
 
 .ghost {
@@ -130,6 +138,7 @@
 	animation: slidebg 1.5s linear infinite;
 	animation-delay: 250ms;
 	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
 }
 	
 .electric {
@@ -144,6 +153,7 @@
 	animation: slidebg 1.5s linear infinite;
 	animation-delay: 250ms;
 	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
 }
 
 .ice {
@@ -158,6 +168,7 @@
 	animation: slidebg 1.5s linear infinite;
 	animation-delay: 250ms;
 	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
 }
 
 .dragon {
@@ -172,6 +183,7 @@
 	animation: slidebg 1.5s linear infinite;
 	animation-delay: 250ms;
 	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
 }
 
 .fairy {
@@ -193,6 +205,7 @@
 	animation: slidebg 1.5s linear infinite;
 	animation-delay: 250ms;
 	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
 }
 
 .fighting {
@@ -208,6 +221,7 @@
 	animation: slidebg 1.5s linear infinite;
 	animation-delay: 250ms;
 	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
 }
 
 .psychic {
@@ -223,11 +237,13 @@
 	animation: slidebg 1.5s linear infinite;
 	animation-delay: 250ms;
 	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
 }
 
 @keyframes slidebg {
 	to {
-		background-position: 15vw;
+		background-position: 14.7vw;
+		/* transition: background-position ; */
 	}
 }
 
