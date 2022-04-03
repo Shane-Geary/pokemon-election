@@ -170,6 +170,7 @@ function PokeGrid() {
                 <div className='title'>
                     {isLoading ?
                     <h1 className='lottie-placeholder'>
+                        <div></div>
                     </h1>
                     :
                     <h1>
@@ -197,7 +198,7 @@ function PokeGrid() {
                                 // }}
                                 >
                                     <PokemonTile
-                                    {...pokemon}
+                                    {...pokemon} 
                                     />
                                 </div>
                             </div>

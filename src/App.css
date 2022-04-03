@@ -25,14 +25,14 @@ h1 {
 		100deg, rgb(255, 0, 0) 10%, white 100%
 	);
 	text-align: center;
+	height: 10%;
+	/* overscroll-behavior: contain; */
 }
 
 .title {
 	background: url(/src/Gifs/Pika-Wave.gif) no-repeat;
 	background-size: 10vw;
 	width: 100vw;
-	/* padding-top: 25px; */
-	/* padding-bottom: 5px; */
 }
 
 .header-line {
@@ -59,8 +59,6 @@ h1 {
 
 .background-wrapper {
 	background: url(/src/imgaes/kantoMap.webp);
-	/* background: linear-gradient(
-		to right, #AF2BBF 0%, #49B6FF 100%); */
 	min-height: 100%;
 	min-width: 100%;
 
@@ -69,7 +67,6 @@ h1 {
 	background-repeat: no-repeat;
 	background-size: cover;
 	overflow: scroll;
-	/* background: radial-gradient(circle at 90% 5%, rgba(123,123,123,1) 0%, rgba(50,50,50,1) 26%, rgba(123,123,123,1) 52%); */
 }
 
 /* .background-wrapper:active {

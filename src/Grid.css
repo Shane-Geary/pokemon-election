@@ -1,9 +1,14 @@
 .grid-wrapper {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+	grid-auto-flow: row;
   	gap: 5px;
 	grid-auto-rows: minmax(50px, 350px);
+	height: 1000vh;
 	margin-top: 50px;
+	overflow-y: scroll;
+	overscroll-behavior-block: contain;
+	scroll-snap-type: y mandatory;
 }
 
 .fire {
@@ -259,11 +264,15 @@
 	overflow: hidden;
 	cursor: pointer;
 	/* opacity: 90%; */
+	scroll-snap-align: start;
+	scroll-behavior: smooth;
 }
 
 .poke-card-wrapper {
 	display: flex;
 	justify-content: center;
+	scroll-snap-align: start;
+	scroll-behavior: smooth;
 }
 
 .poke-card {
@@ -275,6 +284,8 @@
 	justify-content: center;
 	z-index: 1;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	scroll-snap-align: start;
+	scroll-behavior: smooth;
 }
 
 .poke-id {
