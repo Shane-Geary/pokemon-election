@@ -6,9 +6,10 @@
 	grid-auto-rows: minmax(50px, 350px);
 	height: 1000vh;
 	margin-top: 50px;
-	overflow-y: scroll;
-	overscroll-behavior-block: contain;
-	scroll-snap-type: y mandatory;
+	/* overflow-y: scroll; */
+	/* overscroll-behavior-block: contain; */
+	/* scroll-snap-type: y mandatory; */
+	scroll-snap-align: start;
 }
 
 .fire {
@@ -264,8 +265,8 @@
 	overflow: hidden;
 	cursor: pointer;
 	/* opacity: 90%; */
-	scroll-snap-align: start;
-	scroll-behavior: smooth;
+	/* scroll-snap-align: start;
+	scroll-behavior: smooth; */
 }
 
 .poke-card-wrapper {

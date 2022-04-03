@@ -1,7 +1,9 @@
 html body {
-	height: 100%;
+	/* height: 100%; */
 	padding: 0;
 	margin: 0;
+	/* scroll-snap-type: proximity;
+	scroll-snap-type: y proximity; */
 }
 
 .App {
@@ -66,7 +68,8 @@ h1 {
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	overflow: scroll;
+	overflow: auto;
+	scroll-snap-type: y mandatory;
 }
 
 /* .background-wrapper:active {
@@ -82,6 +85,7 @@ h1 {
 .box1 {
 	background: rgba(255, 255, 255, 0);
 	flex: 3;
+	max-height: 100%;
 }
 
 .box2 {
