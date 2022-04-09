@@ -6,7 +6,7 @@ import { useQuery } from "react-query"
 import {AwesomeButton, AwesomeButtonProgress} from 'react-awesome-button'
 import "react-awesome-button/dist/styles.css"
 import lottie from 'lottie-web'
-
+import { useDrag } from 'react-dnd';
 
 import PTlogo from './Lotties/PTLogo.json'
 
@@ -138,6 +138,13 @@ function PokeGrid() {
         return () => clearTimeout(delay)
       }, [])
 
+      const [{isDragging}, drag] = useDrag(() => ({
+          type: 'div',
+          collect: (monitor) => ({
+              isDragging: !!monitor.isDragging(),
+          }),
+    }))
+
       const { error, isLoading, data } = useQuery("pokemons", getPokemons);
 
       if (error) {
@@ -151,6 +158,7 @@ function PokeGrid() {
       }
 
       const { results: pokemons } = data
+
 
     return (
         <div>
@@ -178,8 +186,9 @@ function PokeGrid() {
                             {pokemons.map((pokemon) => (
                             <div key={pokemon.name} className='poke-card-wrapper'>
                                 <div 
+                                style={{ border: isDragging ? '5px dotted lightred' : '0px'}}
                                 className='poke-card'
-                                draggable
+                                // draggable
                                 onDragStart={(e) => console.log(pokemon)}
                                 
                                 >
@@ -225,7 +234,7 @@ function PokeGrid() {
                             Welcome!
                         </div>
                         <div className='poke-member-container'>
-                            {pokemons.map()}
+                            {/* {pokemons.map()} */}
                         </div>
                     </div>
                 </div>
