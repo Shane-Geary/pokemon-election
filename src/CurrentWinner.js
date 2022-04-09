@@ -1,5 +1,4 @@
 import './App.css'
-import PokeGrid from './PokeGrid'
 
 function CurrentWinner() {
 

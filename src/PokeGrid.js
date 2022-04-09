@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import './Grid.css'
+
 import { useQuery } from "react-query"
 // import CurrentWinner from './CurrentWinner';
-import {AwesomeButton, AwesomeButtonProgress} from 'react-awesome-button';
-import "react-awesome-button/dist/styles.css";
+import {AwesomeButton, AwesomeButtonProgress} from 'react-awesome-button'
+import "react-awesome-button/dist/styles.css"
 import lottie from 'lottie-web'
-// import Lottie from 'react-lottie-player'
+
+
 import PTlogo from './Lotties/PTLogo.json'
 
 
@@ -15,9 +17,9 @@ function PokeGrid() {
 
     const [shinySprite, setShinySprite] = useState(false)
 
-    const [pokeDropped, setPokeDropped] = useState(false)
+    // const [pokeDropped, setPokeDropped] = useState(false)
 
-    const [pokeMember, setPokeMember] = useState([])
+    // const [pokeMember, setPokeMember] = useState([])
 
     const getPokemons = async () => {
         const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=150")
@@ -37,21 +39,7 @@ function PokeGrid() {
         setShinySprite(!shinySprite)
     }
 
-    const handleDragStart = (e, pokemon) => {
-        console.log('dragstart div: ', pokemon)
-        e.dataTransfer.setData('draggedPoke', pokemon)
-        pokeMember.push(pokemon)
-    }
-
-    const handleDragOver = (e) => {
-        e.preventDefault()
-    }
-
-    const handleDrop = (e, pokemon) => {
-        // console.log(e)
-        setPokeDropped(true)
-        // console.log(pokemons)
-    }
+    
       
       const PokemonTile = ({ name, url }) => {
 
@@ -192,10 +180,8 @@ function PokeGrid() {
                                 <div 
                                 className='poke-card'
                                 draggable
-                                onDragStart={(e) => handleDragStart(e, pokemon)}
-                                // onClick={(e) => {
-                                    
-                                // }}
+                                onDragStart={(e) => console.log(pokemon)}
+                                
                                 >
                                     <PokemonTile
                                     {...pokemon} 
@@ -233,29 +219,14 @@ function PokeGrid() {
                     </div>
                     <div 
                     className='drawer-wrapper'
-                    onDragOver={(e) => {
-                        console.log('Dragged')
-                        handleDragOver(e)
-                    }}
-                    onDrop={(e) => {
-                        handleDrop(e)
-                        console.log(pokeMember)
-                    }}
+                    
                     >
                         <div>
                             Welcome!
                         </div>
-                        {pokeDropped ?
                         <div className='poke-member-container'>
-                            {pokeMember.map(({name, url}) => {
-                                <div key={name}>
-                                    {/* <PokemonTile {...poke}/> */}
-                                    <PokemonTile {...name}/>
-                                </div>
-                            })}
+                            {pokemons.map()}
                         </div>
-                        : null 
-                        }
                     </div>
                 </div>
                 </div>
