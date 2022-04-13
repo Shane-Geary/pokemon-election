@@ -24,7 +24,7 @@ h1 {
 	);
 	text-align: center;
 	height: 10%;
-	overscroll-behavior: contain;
+	/* overscroll-behavior: contain; */
 }
 
 .title {
@@ -67,6 +67,7 @@ h1 {
 	overflow-y: auto;
 	overscroll-behavior-y: contain;
 	scroll-snap-type: y mandatory;
+	scroll-padding-top: 2%;
 }
 
 /* .background-wrapper:active {

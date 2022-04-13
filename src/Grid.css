@@ -6,8 +6,8 @@
 	grid-auto-rows: minmax(50px, 350px);
 	height: 1000vh;
 	margin-top: 50px;
-	scroll-snap-align: start;
-	scroll-behavior: smooth;
+	/* scroll-snap-align: start;
+	scroll-behavior: smooth; */
 }
 
 .fire {
