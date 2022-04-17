@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import './Grid.css'
 
 import { useQuery } from "react-query"
@@ -105,7 +105,7 @@ function PokeGrid() {
                 console.log(isDragging)
             }}
             onClick={(e) => {
-                console.log(name)
+                console.log(front_default)
             }}
             >
                 <div>
@@ -137,17 +137,21 @@ function PokeGrid() {
         );
       };
 
-      useEffect(() => {
+      useEffect(() => { 
         const delay = setTimeout(() => {
-            lottie.loadAnimation({
-                container: container.current,
-                animationData: PTlogo,
-                loop: false,
-                autoplay: true
-            })
+            if(container.current === true) {
+                return null
+            }
+                lottie.loadAnimation({
+                    container: container.current,
+                    animationData: PTlogo,
+                    loop: false,
+                    autoplay: true
+                })
         }, [2000])
         return () => clearTimeout(delay)
-      }, [])
+      }, []) 
+
 
       const [{isOver}, drop] = useDrop(() => ({
         accept: 'DIV',
@@ -260,7 +264,9 @@ function PokeGrid() {
                         {board.map((pokemon, index) => {
                                 return (
                                     // <PokemonTile {...pokemon} name={pokemon.name}/>
-                                    <div key={index}>{pokemon}</div>
+                                    <div key={index}>
+                                        {pokemon.toUpperCase()}
+                                    </div>
                                 )
                             })}
                         {/* </div> */}
