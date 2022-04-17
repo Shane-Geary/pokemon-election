@@ -44,7 +44,7 @@ function PokeGrid() {
 
         const [{isDragging}, drag] = useDrag(() => ({
             type: 'DIV',
-            item: {name: name},
+            item: {name: name, url: url},
             collect: (monitor) => ({
                 isDragging: !!monitor.isDragging(),
             }),
@@ -102,7 +102,7 @@ function PokeGrid() {
             ref={drag}
             style={{ border: isDragging ? '5px dashed red' : '0px'}}
             onDrag={(e) => {
-                console.log(isDragging)
+                console.log(url)
             }}
             onClick={(e) => {
                 console.log(front_default)
@@ -155,18 +155,21 @@ function PokeGrid() {
 
       const [{isOver}, drop] = useDrop(() => ({
         accept: 'DIV',
-        drop: (item) => addDivToBoard(item.name),
+        drop: (item) => addDivToBoard(item.url),
         collect: (monitor) => ({
             isOver: !!monitor.isOver(),
         }),
     }))
 
-    const addDivToBoard = async (name) => {
-        console.log(name);
+    const addDivToBoard = async (url) => {
+        console.log(url);
+        // console.log(url)
         
         // const pokeList = await data.filter((pokemon) => name === pokemon.name)
-        setBoard((board) => [...board, name])
+        setBoard((board) => [...board, url])
     } 
+
+    
 
       const { error, isLoading, data } = useQuery("pokemons", getPokemons);
 
@@ -179,6 +182,10 @@ function PokeGrid() {
             <div>Loading...</div>
         )
       }
+
+    //   const {
+    //     sprites: { front_shiny }
+    //   } = data
 
       const { results: pokemons } = data
 
@@ -254,7 +261,7 @@ function PokeGrid() {
                     className='drawer-wrapper'
                     ref={drop}
                     onDrop={(e) => {
-                        // console.log(pokemons)
+                        console.log(pokemons)
                     }}
                     >
                         <div>
@@ -263,9 +270,8 @@ function PokeGrid() {
                         {/* <div ref={drop} className='poke-member-container'> */}
                         {board.map((pokemon, index) => {
                                 return (
-                                    // <PokemonTile {...pokemon} name={pokemon.name}/>
                                     <div key={index}>
-                                        {pokemon.toUpperCase()}
+                                       {pokemon}
                                     </div>
                                 )
                             })}
