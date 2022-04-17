@@ -3,7 +3,7 @@ import './Grid.css'
 
 import { useQuery } from "react-query"
 // import CurrentWinner from './CurrentWinner';
-import {AwesomeButton, AwesomeButtonProgress} from 'react-awesome-button'
+import {AwesomeButton} from 'react-awesome-button'
 import "react-awesome-button/dist/styles.css"
 import lottie from 'lottie-web'
 import { useDrag } from 'react-dnd';
@@ -43,6 +43,14 @@ function PokeGrid() {
       
       const PokemonTile = ({ name, url }) => {
 
+        const [{isDragging}, drag] = useDrag(() => ({
+            type: 'DIV',
+            item: {name},
+            collect: (monitor) => ({
+                isDragging: !!monitor.isDragging(),
+            }),
+        }))
+
         const { error, isLoading, data } = useQuery(`pokemon${name}`, () =>
           getPokemon(url)
         )
@@ -81,20 +89,21 @@ function PokeGrid() {
             }]
         } = data
 
-        const {
-            moves: [{
-                move: { name: attack }
-            }]
-        } = data
+        // const {
+        //     moves: [{
+        //         move: { name: attack }
+        //     }]
+        // } = data
 
         const style = `type-styler ${type}`
       
         return (
             <div 
             className={style}
-            onMouseEnter={(e) => {
-                // e.preventDefault()
-                // e.stopPropagation()
+            ref={drag}
+            style={{ border: isDragging ? '5px solid red' : '0px'}}
+            onDragStart={(e) => {
+                console.log(isDragging)
             }}
             >
                 <div>
@@ -138,13 +147,6 @@ function PokeGrid() {
         return () => clearTimeout(delay)
       }, [])
 
-      const [{isDragging}, drag] = useDrag(() => ({
-          type: 'div',
-          collect: (monitor) => ({
-              isDragging: !!monitor.isDragging(),
-          }),
-    }))
-
       const { error, isLoading, data } = useQuery("pokemons", getPokemons);
 
       if (error) {
@@ -186,10 +188,9 @@ function PokeGrid() {
                             {pokemons.map((pokemon) => (
                             <div key={pokemon.name} className='poke-card-wrapper'>
                                 <div 
-                                style={{ border: isDragging ? '5px dotted lightred' : '0px'}}
                                 className='poke-card'
-                                // draggable
-                                onDragStart={(e) => console.log(pokemon)}
+                                onDragStart={(e) => {
+                                }}
                                 
                                 >
                                     <PokemonTile
