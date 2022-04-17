@@ -4,10 +4,10 @@
 	grid-auto-flow: row;
   	gap: 5px;
 	grid-auto-rows: minmax(50px, 350px);
-	height: 1000vh;
+	height: 1025vh;
 	margin-top: 50px;
-	/* scroll-snap-align: start;
-	scroll-behavior: smooth; */
+	/* margin-bottom: 500px; */
+	/* overflow: visible; */
 }
 
 .fire {
