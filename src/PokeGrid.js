@@ -157,8 +157,11 @@ function PokeGrid() {
         }),
     }))
 
-    const addDivToBoard = (name) => {
+    const addDivToBoard = async (name) => {
         console.log(name);
+        
+        // const pokeList = await data.filter((pokemon) => name === pokemon.name)
+        setBoard((board) => [...board, name])
     } 
 
       const { error, isLoading, data } = useQuery("pokemons", getPokemons);
@@ -174,6 +177,8 @@ function PokeGrid() {
       }
 
       const { results: pokemons } = data
+
+
 
 
     return (
@@ -244,14 +249,18 @@ function PokeGrid() {
                     <div 
                     className='drawer-wrapper'
                     ref={drop}
+                    onDrop={(e) => {
+                        // console.log(pokemons)
+                    }}
                     >
                         <div>
                             Welcome!
                         </div>
                         {/* <div ref={drop} className='poke-member-container'> */}
-                        {board.map((pokemon) => {
+                        {board.map((pokemon, index) => {
                                 return (
-                                    <PokemonTile {...pokemon} name={pokemon.name}/>
+                                    // <PokemonTile {...pokemon} name={pokemon.name}/>
+                                    <div key={index}>{pokemon}</div>
                                 )
                             })}
                         {/* </div> */}
