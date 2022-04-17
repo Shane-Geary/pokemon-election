@@ -7,6 +7,7 @@ import {AwesomeButton} from 'react-awesome-button'
 import "react-awesome-button/dist/styles.css"
 import lottie from 'lottie-web'
 import { useDrag } from 'react-dnd';
+import { useDrop } from 'react-dnd';
 
 import PTlogo from './Lotties/PTLogo.json'
 
@@ -17,9 +18,7 @@ function PokeGrid() {
 
     const [shinySprite, setShinySprite] = useState(false)
 
-    // const [pokeDropped, setPokeDropped] = useState(false)
-
-    // const [pokeMember, setPokeMember] = useState([])
+    const [board, setBoard] = useState([])
 
     const getPokemons = async () => {
         const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=150")
@@ -45,7 +44,7 @@ function PokeGrid() {
 
         const [{isDragging}, drag] = useDrag(() => ({
             type: 'DIV',
-            item: {name},
+            item: {name: name},
             collect: (monitor) => ({
                 isDragging: !!monitor.isDragging(),
             }),
@@ -98,12 +97,15 @@ function PokeGrid() {
         const style = `type-styler ${type}`
       
         return (
-            <div 
+            <div
             className={style}
             ref={drag}
-            style={{ border: isDragging ? '5px solid red' : '0px'}}
-            onDragStart={(e) => {
+            style={{ border: isDragging ? '5px dashed red' : '0px'}}
+            onDrag={(e) => {
                 console.log(isDragging)
+            }}
+            onClick={(e) => {
+                console.log(name)
             }}
             >
                 <div>
@@ -146,6 +148,18 @@ function PokeGrid() {
         }, [2000])
         return () => clearTimeout(delay)
       }, [])
+
+      const [{isOver}, drop] = useDrop(() => ({
+        accept: 'DIV',
+        drop: (item) => addDivToBoard(item.name),
+        collect: (monitor) => ({
+            isOver: !!monitor.isOver(),
+        }),
+    }))
+
+    const addDivToBoard = (name) => {
+        console.log(name);
+    } 
 
       const { error, isLoading, data } = useQuery("pokemons", getPokemons);
 
@@ -229,14 +243,18 @@ function PokeGrid() {
                     </div>
                     <div 
                     className='drawer-wrapper'
-                    
+                    ref={drop}
                     >
                         <div>
                             Welcome!
                         </div>
-                        <div className='poke-member-container'>
-                            {/* {pokemons.map()} */}
-                        </div>
+                        {/* <div ref={drop} className='poke-member-container'> */}
+                        {board.map((pokemon) => {
+                                return (
+                                    <PokemonTile {...pokemon} name={pokemon.name}/>
+                                )
+                            })}
+                        {/* </div> */}
                     </div>
                 </div>
                 </div>
