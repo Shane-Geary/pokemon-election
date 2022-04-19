@@ -224,7 +224,7 @@ function PokeGrid() {
                                 
                                 >
                                     <PokemonTile
-                                    {...pokemon} 
+                                    {...pokemon}
                                     />
                                 </div>
                             </div>
