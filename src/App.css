@@ -1,6 +1,8 @@
 html body {
 	padding: 0;
 	margin: 0;
+	overflow-y: hidden;
+	overscroll-behavior-y: contain;
 }
 
 .App {
@@ -23,8 +25,7 @@ h1 {
 		100deg, rgb(255, 0, 0) 10%, white 100%
 	);
 	text-align: center;
-	height: 10%;
-	/* overscroll-behavior: contain; */
+	height: 10%;	
 }
 
 .title {
@@ -93,7 +94,6 @@ h1 {
 	background: rgba(255, 255, 255, 0);
     flex: 1;
 	overflow: hidden;
-	
 }
 
 .awesome-button {
@@ -112,6 +112,8 @@ h1 {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	overflow-y: hidden;
+	overscroll-behavior-y: contain;
 }
 
 .poke-member-container {

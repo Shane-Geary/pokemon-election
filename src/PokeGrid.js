@@ -38,6 +38,21 @@ function PokeGrid() {
         setShinySprite(!shinySprite)
     }
 
+    useEffect(() => { 
+        const delay = setTimeout(() => {
+            if(container.current === true) {
+                return null
+            }
+                lottie.loadAnimation({
+                    container: container.current,
+                    animationData: PTlogo,
+                    loop: false,
+                    autoplay: true
+                })
+        }, [2000])
+        return () => clearTimeout(delay)
+      }, []) 
+
     
       
       const PokemonTile = ({ name, url }) => {
@@ -88,11 +103,11 @@ function PokeGrid() {
             }]
         } = data
 
-        // const {
-        //     moves: [{
-        //         move: { name: attack }
-        //     }]
-        // } = data
+        const {
+            moves: [ 
+                {move:{ name: attack }}
+            ]
+        } = data
 
         const style = `type-styler ${type}`
       
@@ -102,7 +117,7 @@ function PokeGrid() {
             ref={drag}
             style={{ border: isDragging ? '5px dashed red' : '0px'}}
             onDrag={(e) => {
-                console.log(url)
+                console.log(front_default)
             }}
             onClick={(e) => {
                 console.log(front_default)
@@ -129,44 +144,31 @@ function PokeGrid() {
                 <div>
                     Ability: {ability}
                 </div>
-                {/* <div>
+                <div>
                     Attack: {attack}
-                </div> */}
-                {/* <button onClick={() => console.log(data)}>DATA</button> */}
+                </div>
+                <button onClick={() => console.log(data)}>DATA</button>
             </div>
         );
       };
 
-      useEffect(() => { 
-        const delay = setTimeout(() => {
-            if(container.current === true) {
-                return null
-            }
-                lottie.loadAnimation({
-                    container: container.current,
-                    animationData: PTlogo,
-                    loop: false,
-                    autoplay: true
-                })
-        }, [2000])
-        return () => clearTimeout(delay)
-      }, []) 
+      
 
 
       const [{isOver}, drop] = useDrop(() => ({
         accept: 'DIV',
-        drop: (item) => addDivToBoard(item.url),
+        drop: (item) => addDivToBoard(item),
         collect: (monitor) => ({
             isOver: !!monitor.isOver(),
         }),
     }))
 
-    const addDivToBoard = async (url) => {
-        console.log(url);
+    const addDivToBoard = async (name) => {
+        console.log(name);
         // console.log(url)
         
         // const pokeList = await data.filter((pokemon) => name === pokemon.name)
-        setBoard((board) => [...board, url])
+        setBoard((board) => [...board, name])
     } 
 
     
@@ -271,7 +273,7 @@ function PokeGrid() {
                         {board.map((pokemon, index) => {
                                 return (
                                     <div key={index}>
-                                       {pokemon}
+                                       <PokemonTile {...pokemon}/>
                                     </div>
                                 )
                             })}
