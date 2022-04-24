@@ -38,7 +38,7 @@ function PokeGrid() {
         setShinySprite(!shinySprite)
     }
 
-    useEffect(() => { 
+    useEffect(() => {
         const delay = setTimeout(() => {
             if(container.current === true) {
                 return null
@@ -55,77 +55,159 @@ function PokeGrid() {
 
     
       
-      const PokemonTile = ({ name, url }) => {
+    const PokemonTile = ({ name, url }) => {
 
-        const [{isDragging}, drag] = useDrag(() => ({
-            type: 'DIV',
-            item: {name: name, url: url},
-            collect: (monitor) => ({
-                isDragging: !!monitor.isDragging(),
-            }),
-        }))
+    const [{isDragging}, drag] = useDrag(() => ({
+        type: 'DIV',
+        item: {name: name, url: url},
+        collect: (monitor) => ({
+            isDragging: !!monitor.isDragging(),
+        }),
+    }))
 
-        const { error, isLoading, data } = useQuery(`pokemon${name}`, () =>
-          getPokemon(url)
+    const { error, isLoading, data } = useQuery(`pokemon${name}`, () =>
+        getPokemon(url)
+    )
+    
+    if (error) {
+        return <div>Error: {error}</div>
+    }
+    
+    if (isLoading) {
+        return (
+        <div>Loading...</div>
         )
-      
-        if (error) {
-          return <div>Error: {error}</div>
-        }
-      
-        if (isLoading) {
-          return (
-            <div>Loading...</div>
-          )
-        }
+    }
 
+    const {
+        id: index
+    } = data
+    
+    const {
+        sprites: { front_shiny }
+    } = data
+
+    const {
+        sprites: { front_default }
+    } = data
+
+    const {
+        types: [{
+            type: { name: type }
+        }]
+    } = data
+
+    const {
+        abilities: [{
+            ability: { name: ability }
+        }]
+    } = data
+
+    const {
+        moves: [ 
+            {move:{ name: attack }}
+        ]
+    } = data
+
+    const style = `type-styler ${type}`
+    
+    return (        
+        <div
+        className={style}
+        ref={drag}
+        style={{ border: isDragging ? '5px dashed red' : '0px'}}
+        onDrag={(e) => {
+            console.log(front_default)
+        }}
+        onClick={(e) => {
+            console.log(front_default)
+        }}
+        >
+            <div>
+                <small className='poke-id'>id: {index}</small>
+            </div>
+            {shinySprite ?
+            <div className='poke-sprite'>
+                <img src={front_shiny} alt={name} />
+            </div>
+            : 
+            <div className='poke-sprite'>
+                <img src={front_default} alt={name} />
+            </div>
+            }
+            <div>
+                {name.toUpperCase()}
+            </div>
+            <div>
+                Type: {type}
+            </div>
+            <div>
+                Ability: {ability}
+            </div>
+            <div>
+                Attack: {attack}
+            </div>
+            <button onClick={() => console.log(data)}>DATA</button>
+        </div>
+        );
+    };
+
+
+
+
+
+    const DroppedPoke = ({ name, url }) => {
+
+        // const [{isDragging}, drag] = useDrag(() => ({
+        //     type: 'DIV',
+        //     item: {name: name, url: url},
+        //     collect: (monitor) => ({
+        //         isDragging: !!monitor.isDragging(),
+        //     }),
+        // }))
+    
+        const { error, isLoading, data } = useQuery(`pokemon${name}`, () =>
+            getPokemon(url)
+        )
+        
+        if (error) {
+            return <div>Error: {error}</div>
+        }
+        
+        if (isLoading) {
+            return (
+            <div>Loading...</div>
+            )
+        }
+    
         const {
             id: index
         } = data
-      
+        
         const {
-          sprites: { front_shiny }
+            sprites: { front_shiny }
         } = data
-
+    
         const {
             sprites: { front_default }
         } = data
-
+    
         const {
             types: [{
                 type: { name: type }
             }]
         } = data
-
+    
         const {
             abilities: [{
                 ability: { name: ability }
             }]
         } = data
-
-        const {
-            moves: [ 
-                {move:{ name: attack }}
-            ]
-        } = data
-
-        const style = `type-styler ${type}`
-      
-        return (
-            <div
-            className={style}
-            ref={drag}
-            style={{ border: isDragging ? '5px dashed red' : '0px'}}
-            onDrag={(e) => {
-                console.log(front_default)
-            }}
-            onClick={(e) => {
-                console.log(front_default)
-            }}
-            >
-                <div>
-                    <small className='poke-id'>id: {index}</small>
-                </div>
+    
+        // const style = `type-styler ${type}`
+        
+        return (        
+            <div>
                 {shinySprite ?
                 <div className='poke-sprite'>
                     <img src={front_shiny} alt={name} />
@@ -135,24 +217,12 @@ function PokeGrid() {
                     <img src={front_default} alt={name} />
                 </div>
                 }
-                <div>
-                    {name.toUpperCase()}
-                </div>
-                <div>
-                    Type: {type}
-                </div>
-                <div>
-                    Ability: {ability}
-                </div>
-                <div>
-                    Attack: {attack}
-                </div>
-                <button onClick={() => console.log(data)}>DATA</button>
             </div>
-        );
-      };
+            )
+        };
 
-      
+
+
 
 
       const [{isOver}, drop] = useDrop(() => ({
@@ -169,21 +239,21 @@ function PokeGrid() {
         
         // const pokeList = await data.filter((pokemon) => name === pokemon.name)
         setBoard((board) => [...board, name])
-    } 
+    }
 
     
 
-      const { error, isLoading, data } = useQuery("pokemons", getPokemons);
+    const { error, isLoading, data } = useQuery("pokemons", getPokemons);
 
-      if (error) {
+    if (error) {
         return <div>Error: {error}</div>
-      }
-    
-      if (isLoading) {
+    }
+
+    if (isLoading) {
         return (
             <div>Loading...</div>
         )
-      }
+    }
 
     //   const {
     //     sprites: { front_shiny }
@@ -223,11 +293,10 @@ function PokeGrid() {
                                 className='poke-card'
                                 onDragStart={(e) => {
                                 }}
-                                
                                 >
-                                    <PokemonTile
+                                <PokemonTile
                                     {...pokemon}
-                                    />
+                                />
                                 </div>
                             </div>
                         ))}
@@ -263,21 +332,21 @@ function PokeGrid() {
                     className='drawer-wrapper'
                     ref={drop}
                     onDrop={(e) => {
-                        console.log(pokemons)
+                        // console.log(pokemons)
                     }}
                     >
                         <div>
                             Welcome!
                         </div>
-                        {/* <div ref={drop} className='poke-member-container'> */}
+                        <div ref={drop} className='poke-member-container'>
                         {board.map((pokemon, index) => {
                                 return (
                                     <div key={index}>
-                                       <PokemonTile {...pokemon}/>
+                                       <DroppedPoke {...pokemon}/>
                                     </div>
                                 )
                             })}
-                        {/* </div> */}
+                        </div>
                     </div>
                 </div>
                 </div>
