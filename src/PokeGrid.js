@@ -20,8 +20,6 @@ function PokeGrid() {
 
     const [board, setBoard] = useState([])
 
-    const [teamCount, setTeamCount] = useState(0)
-
     const [maxedPokes, setMaxedPokes] = useState(false)
 
     const getPokemons = async () => {
@@ -66,17 +64,16 @@ function PokeGrid() {
     }))
 
     const addDivToBoard = async (name) => {
-        console.log(maxedPokes);
+        // console.log(board); 
         
-       if (maxedPokes) {
-           console.log("Max Poke's");
-           return null
-       }
        setBoard((board) => [...board, name])
     }
 
+    const handleMaxAdded = () => {
+        
+    }
+
     
-      
     const PokemonTile = ({ name, url }) => {
 
     const [{isDragging}, drag] = useDrag(() => ({
@@ -214,25 +211,6 @@ function PokeGrid() {
         };
 
 
-    // const [{isOver}, drop] = useDrop(() => ({
-    //     accept: 'DIV',
-    //     drop: (item) => addDivToBoard(item),
-    //     collect: (monitor) => ({
-    //         isOver: !!monitor.isOver(),
-    //     }),
-    // }))
-
-    // const addDivToBoard = async (name) => {
-    //     console.log(maxedPokes);
-        
-    //    if (maxedPokes) {
-    //        console.log("Max Poke's");
-    //        return null
-    //    }
-    //    setBoard((board) => [...board, name])
-    // }
-
-    
 
     const { error, isLoading, data } = useQuery("pokemons", getPokemons);
 
@@ -246,13 +224,7 @@ function PokeGrid() {
         )
     }
 
-    //   const {
-    //     sprites: { front_shiny }
-    //   } = data
-
-      const { results: pokemons } = data
-
-
+    const { results: pokemons } = data
 
 
     return (
@@ -319,28 +291,31 @@ function PokeGrid() {
                         </AwesomeButton>
                         }
                     </div>
-                    <div 
+                    <div
+                    style={{border: isOver ? '10px solid white' : '4px solid'}}
                     className='drawer-wrapper'
                     ref={drop}
                     onDrop={(e) => {
-                        console.log(board)
-                        // setTeamCount(teamCount + 1)
-                        // if(teamCount === 2) {
-                        //     setMaxedPokes(true)
-                        // }
+                        // handleMaxAdded()
                     }}
                     >
                         <div>
-                            Welcome!
+                            Assemble your Team!
                         </div>
                         <div ref={drop} className='poke-member-container'>
-                        {board.map((pokemon, index) => {
+                            {board.map((pokemon, index) => {
                                 return (
+                                    <div>
+                                    {/* {board.length === 2 ? */}
                                     <div key={index}>
                                        <DroppedPoke {...pokemon}/>
                                     </div>
+                                    {/* : 
+                                    null
+                                    } */}
+                                    </div>
                                 )
-                            })}
+                            })}                  
                         </div>
                     </div>
                 </div>

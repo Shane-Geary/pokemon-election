@@ -119,12 +119,12 @@ h1 {
 .poke-member-container {
 	display: grid;
     grid-template-columns: repeat(2, 1fr);
-	grid-auto-flow: row;
   	gap: 5px;
-	grid-auto-rows: minmax(50px, 250px);
+	grid-auto-rows: 250px;
+	grid-row: 1 3;
 	height: 1025vh;
-	margin-top: 50px;
-	
+	margin-top: 120px;
+	overflow: hidden;
 }
 
 .lottie-placeholder {
