@@ -20,6 +20,10 @@ function PokeGrid() {
 
     const [board, setBoard] = useState([])
 
+    const [teamCount, setTeamCount] = useState(0)
+
+    const [maxedPokes, setMaxedPokes] = useState(false)
+
     const getPokemons = async () => {
         const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=150")
         const data = await response.json()
@@ -52,6 +56,24 @@ function PokeGrid() {
         }, [2000])
         return () => clearTimeout(delay)
       }, []) 
+
+      const [{isOver}, drop] = useDrop(() => ({
+        accept: 'DIV',
+        drop: (item) => addDivToBoard(item),
+        collect: (monitor) => ({
+            isOver: !!monitor.isOver(),
+        }),
+    }))
+
+    const addDivToBoard = async (name) => {
+        console.log(maxedPokes);
+        
+       if (maxedPokes) {
+           console.log("Max Poke's");
+           return null
+       }
+       setBoard((board) => [...board, name])
+    }
 
     
       
@@ -152,20 +174,8 @@ function PokeGrid() {
         );
     };
 
-
-
-
-
     const DroppedPoke = ({ name, url }) => {
 
-        // const [{isDragging}, drag] = useDrag(() => ({
-        //     type: 'DIV',
-        //     item: {name: name, url: url},
-        //     collect: (monitor) => ({
-        //         isDragging: !!monitor.isDragging(),
-        //     }),
-        // }))
-    
         const { error, isLoading, data } = useQuery(`pokemon${name}`, () =>
             getPokemon(url)
         )
@@ -179,11 +189,7 @@ function PokeGrid() {
             <div>Loading...</div>
             )
         }
-    
-        const {
-            id: index
-        } = data
-        
+
         const {
             sprites: { front_shiny }
         } = data
@@ -192,28 +198,14 @@ function PokeGrid() {
             sprites: { front_default }
         } = data
     
-        const {
-            types: [{
-                type: { name: type }
-            }]
-        } = data
-    
-        const {
-            abilities: [{
-                ability: { name: ability }
-            }]
-        } = data
-    
-        // const style = `type-styler ${type}`
-        
-        return (        
+        return (
             <div>
                 {shinySprite ?
-                <div className='poke-sprite'>
+                <div className='poke-sprite-board'>
                     <img src={front_shiny} alt={name} />
                 </div>
                 : 
-                <div className='poke-sprite'>
+                <div className='poke-sprite-board'>
                     <img src={front_default} alt={name} />
                 </div>
                 }
@@ -222,24 +214,23 @@ function PokeGrid() {
         };
 
 
+    // const [{isOver}, drop] = useDrop(() => ({
+    //     accept: 'DIV',
+    //     drop: (item) => addDivToBoard(item),
+    //     collect: (monitor) => ({
+    //         isOver: !!monitor.isOver(),
+    //     }),
+    // }))
 
-
-
-      const [{isOver}, drop] = useDrop(() => ({
-        accept: 'DIV',
-        drop: (item) => addDivToBoard(item),
-        collect: (monitor) => ({
-            isOver: !!monitor.isOver(),
-        }),
-    }))
-
-    const addDivToBoard = async (name) => {
-        console.log(name);
-        // console.log(url)
+    // const addDivToBoard = async (name) => {
+    //     console.log(maxedPokes);
         
-        // const pokeList = await data.filter((pokemon) => name === pokemon.name)
-        setBoard((board) => [...board, name])
-    }
+    //    if (maxedPokes) {
+    //        console.log("Max Poke's");
+    //        return null
+    //    }
+    //    setBoard((board) => [...board, name])
+    // }
 
     
 
@@ -332,7 +323,11 @@ function PokeGrid() {
                     className='drawer-wrapper'
                     ref={drop}
                     onDrop={(e) => {
-                        // console.log(pokemons)
+                        console.log(board)
+                        // setTeamCount(teamCount + 1)
+                        // if(teamCount === 2) {
+                        //     setMaxedPokes(true)
+                        // }
                     }}
                     >
                         <div>

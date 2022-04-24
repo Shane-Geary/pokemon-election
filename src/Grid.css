@@ -6,8 +6,6 @@
 	grid-auto-rows: minmax(50px, 350px);
 	height: 1025vh;
 	margin-top: 50px;
-	/* margin-bottom: 500px; */
-	/* overflow: visible; */
 }
 
 .fire {
@@ -297,6 +295,10 @@
 
 .poke-sprite img {
 	width: 115px;
+}
+
+.poke-sprite-board img {
+	width: 125px;
 }
 
 @media screen {
