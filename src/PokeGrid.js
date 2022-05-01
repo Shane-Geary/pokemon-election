@@ -231,6 +231,15 @@ function PokeGrid() {
         <div>
             <div className='title-wrapper'>
                 <div className='title'>
+                <div className='shiny-toggle'>
+                    <div className='shiny-toggle-btn'>
+                        Shiny Poke's 
+                    </div>
+                    <label className="switch">
+                        <input type="checkbox" />
+                        <span className="slider"></span>
+                    </label>
+                </div>
                     {isLoading ?
                     <h1 className='lottie-placeholder'>
                         <div></div>
@@ -238,8 +247,8 @@ function PokeGrid() {
                     :
                     <h1>
                         <div 
+                        //Lottie
                             ref={container}
-                            // onClick={() => lottie.play()}
                         />
                     </h1>
                     }
