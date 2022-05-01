@@ -10,6 +10,7 @@ import { useDrag } from 'react-dnd';
 import { useDrop } from 'react-dnd';
 
 import PTlogo from './Lotties/PTLogo.json'
+import RightArrow from './images/right-arrows.png'
 
 
 function PokeGrid() {
@@ -20,7 +21,7 @@ function PokeGrid() {
 
     const [board, setBoard] = useState([])
 
-    const [maxedPokes, setMaxedPokes] = useState(false)
+    const [shinyContainer, setshinyContainer] = useState(false)
 
     const getPokemons = async () => {
         const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=150")
@@ -51,9 +52,15 @@ function PokeGrid() {
                     loop: false,
                     autoplay: true
                 })
-        }, [2000])
+        }, 2000)
         return () => clearTimeout(delay)
       }, []) 
+
+      useEffect(() => {
+        setTimeout(() => {
+            setshinyContainer(true)
+        }, 4000)
+      })
 
       const [{isOver}, drop] = useDrop(() => ({
         accept: 'DIV',
@@ -67,10 +74,6 @@ function PokeGrid() {
         // console.log(board); 
         
        setBoard((board) => [...board, name])
-    }
-
-    const handleMaxAdded = () => {
-        
     }
 
     
@@ -231,15 +234,28 @@ function PokeGrid() {
         <div>
             <div className='title-wrapper'>
                 <div className='title'>
+                {!shinyContainer ?
+                <h1 className='lottie-placeholder'>
+                    <div></div>
+                </h1>
+                :
                 <div className='shiny-toggle'>
                     <div className='shiny-toggle-btn'>
-                        Shiny Poke's 
+                        {shinySprite ?
+                        <div>Normal Poke's</div>
+                        :
+                        <div>Shiny Poke's</div>
+                        }
                     </div>
+                    <img src={RightArrow} alt='Right arrow' />
                     <label className="switch">
-                        <input type="checkbox" />
+                        <input type="checkbox" 
+                            onClick={toggleShinySprite}
+                        />
                         <span className="slider"></span>
                     </label>
                 </div>
+                }
                     {isLoading ?
                     <h1 className='lottie-placeholder'>
                         <div></div>

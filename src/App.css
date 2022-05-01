@@ -58,7 +58,7 @@ h1 {
 }
 
 .background-wrapper {
-	background: url(/src/imgaes/kantoMap.webp);
+	background: url(/src/images/kantoMap.webp);
 	min-height: 100%;
 	min-width: 100%;
 
@@ -135,9 +135,10 @@ h1 {
 	position: absolute;
 	top: 3vh;
 	left: 15vw;
-	border: 2px solid blue;
+	/* background-color: red; */
+	border: 2px groove whitesmoke;
 	border-radius: 40px;
-	width: 10%;
+	width: 12%;
 	height: 30%;
 	display: flex;
 	justify-content: center;
@@ -145,8 +146,13 @@ h1 {
 }
 
 .shiny-toggle-btn {
-	/* text-align: center;
-	align-self: center; */
+	margin-right: 15px;
+}
+
+.shiny-toggle-btn img{
+	position: fixed;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
 .switch {
@@ -192,7 +198,7 @@ h1 {
 }
 
 input:checked + .slider {
-	background-color: #2196F3;
+	background-color: rgb(121, 239, 200);
 }
 
 input:focus + .slider {
