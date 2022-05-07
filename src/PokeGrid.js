@@ -291,31 +291,6 @@ function PokeGrid() {
                         </div>
                 </div>
                  <div className='box2'>
-                    <div className='shiny-btn-box'>
-                        {shinySprite ?
-                        <AwesomeButton
-                        className='awesome-button'
-                        type='secondary'
-                        size='medium'
-                        onPress={async() => {
-                            toggleShinySprite()
-                        }}
-                        >
-                            ORIGINAL
-                        </AwesomeButton>
-                        :
-                        <AwesomeButton 
-                        className='awesome-button'
-                        type='secondary'
-                        size='medium'
-                        onPress={async() => {
-                            toggleShinySprite()
-                        }}
-                        >
-                            SHINY
-                        </AwesomeButton>
-                        }
-                    </div>
                     <div
                     style={{border: isOver ? '10px solid white' : '4px solid'}}
                     className='drawer-wrapper'

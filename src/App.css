@@ -96,26 +96,6 @@ h1 {
 	overflow: hidden;
 }
 
-.awesome-button {
-	background-color: yellowgreen !important;
-}
-
-.shiny-btn-box {
-	width: 20%;
-	height: 5%;
-	border: 4px solid;
-	border-radius: 20px;
-	position: absolute;
-	top: 15%;
-	right: 2%;
-	margin-top: 5px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	overflow-y: hidden;
-	overscroll-behavior-y: contain;
-}
-
 .poke-member-container {
 	display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -135,10 +115,9 @@ h1 {
 	position: absolute;
 	top: 3vh;
 	left: 15vw;
-	/* background-color: red; */
 	border: 2px groove whitesmoke;
 	border-radius: 40px;
-	width: 12%;
+	width: 15%;
 	height: 30%;
 	display: flex;
 	justify-content: center;
@@ -147,6 +126,10 @@ h1 {
 
 .shiny-toggle-btn {
 	margin-right: 15px;
+}
+
+input:checked + .shiny-toggle:before {
+	width: 50%;
 }
 
 .shiny-toggle-btn img{
