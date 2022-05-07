@@ -194,8 +194,16 @@ function PokeGrid() {
             sprites: { front_shiny }
         } = data
     
+        // const {
+        //     sprites: { front_default }
+        // } = data
+
         const {
-            sprites: { front_default }
+            sprites: {
+                other: {
+                    'official-artwork': { front_default }
+                }
+            }
         } = data
     
         return (
