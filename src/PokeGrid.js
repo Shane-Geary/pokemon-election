@@ -86,6 +86,7 @@ function PokeGrid() {
 
     const deleteTeam = () => {
         setBoard(board.slice(0, board))
+        setMaxPokes(false)
     }
 
     
@@ -324,7 +325,10 @@ function PokeGrid() {
                         </div>
                         {maxPokes ?
                             <div className='max-poke-warning'>
-                                The max number of Poke's in a team is 6.
+                                <div className='max-warning-text'>
+                                    The max number of Poke's in a team is 6.
+                                </div>
+                                <i className='close-icon'></i>
                             </div>
                         : null
                         }
@@ -332,7 +336,6 @@ function PokeGrid() {
                             <button className='delete-btn'
                                 onClick={deleteTeam}
                             >
-                                Delete Team
                             </button>
                         </div>
                         <div ref={drop} className='poke-member-container'>
