@@ -3,11 +3,10 @@ import './Grid.css'
 
 import { useQuery } from "react-query"
 // import CurrentWinner from './CurrentWinner';
-import {AwesomeButton} from 'react-awesome-button'
-import "react-awesome-button/dist/styles.css"
 import lottie from 'lottie-web'
 import { useDrag } from 'react-dnd';
 import { useDrop } from 'react-dnd';
+import Modal from '@mui/material/Modal';
 
 import PTlogo from './Lotties/PTLogo.json'
 import RightArrow from './images/right-arrows.png'
@@ -22,6 +21,8 @@ function PokeGrid() {
     const [board, setBoard] = useState([])
 
     const [shinyContainer, setshinyContainer] = useState(false)
+
+    const [maxPokes, setMaxPokes] = useState(false)
 
     const getPokemons = async () => {
         const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=150")
@@ -62,6 +63,13 @@ function PokeGrid() {
         }, 4000)
       })
 
+      useEffect(() => {
+          if(board.length > 6) {
+              console.log('Max Pokes')
+              setMaxPokes(true)
+          }
+      }, [board.length])
+
       const [{isOver}, drop] = useDrop(() => ({
         accept: 'DIV',
         drop: (item) => addDivToBoard(item),
@@ -71,9 +79,13 @@ function PokeGrid() {
     }))
 
     const addDivToBoard = async (name) => {
-        // console.log(board); 
+        // console.log(board.length);
         
        setBoard((board) => [...board, name])
+    }
+
+    const deleteTeam = () => {
+        setBoard(board.slice(0, board))
     }
 
     
@@ -127,7 +139,7 @@ function PokeGrid() {
 
     const {
         moves: [ 
-            {move:{ name: attack }}
+            {move: {name: attack}}
         ]
     } = data
 
@@ -307,8 +319,21 @@ function PokeGrid() {
                         // handleMaxAdded()
                     }}
                     >
-                        <div>
+                        <div className='board-title'>
                             Assemble your Team!
+                        </div>
+                        {maxPokes ?
+                            <div className='max-poke-warning'>
+                                The max number of Poke's in a team is 6.
+                            </div>
+                        : null
+                        }
+                        <div className='delete-wrapper'>
+                            <button className='delete-btn'
+                                onClick={deleteTeam}
+                            >
+                                Delete Team
+                            </button>
                         </div>
                         <div ref={drop} className='poke-member-container'>
                             {board.map((pokemon, index) => {
@@ -316,7 +341,7 @@ function PokeGrid() {
                                     <div>
                                     {/* {board.length === 2 ? */}
                                     <div key={index}>
-                                       <DroppedPoke {...pokemon}/>
+                                       <DroppedPoke {...pokemon} />
                                     </div>
                                     {/* : 
                                     null

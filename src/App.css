@@ -193,3 +193,24 @@ input:checked + .slider:before {
 	-ms-transform: translateX(26px);
 	transform: translateX(26px);
 }
+
+.board-title {
+	margin-top: 10%;
+}
+
+.max-poke-warning {
+	background-color: rgba(0, 0, 0, 0.324);
+	color: white;
+	border: 2px solid red;
+	border-radius: 20px;
+	position: relative;
+	top: 10%;
+	left: 5%;
+	width: 90%;
+}
+
+.delete-wrapper {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
