@@ -311,7 +311,11 @@ function PokeGrid() {
 										{/* eslint-disable-next-line react/no-unescaped-entities */}
                                     The max number of Poke's in a team is 6.
 									</div>
-									<i className='close-icon'></i>
+									<i className='close-icon'
+										onClick={() => {
+											setMaxPokes(false)
+										}}
+									></i>
 								</div>
 								: null
 							}
