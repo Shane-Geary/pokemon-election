@@ -1,12 +1,13 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+/* eslint-disable react/no-unescaped-entities */
+import {useEffect, useRef, useState} from 'react'
 import './Grid.css'
 
-import { useQuery } from "react-query"
+import {useQuery} from 'react-query'
 // import CurrentWinner from './CurrentWinner';
 import lottie from 'lottie-web'
-import { useDrag } from 'react-dnd';
-import { useDrop } from 'react-dnd';
-import Modal from '@mui/material/Modal';
+import {useDrag} from 'react-dnd'
+import {useDrop} from 'react-dnd'
+// import Modal from '@mui/material/Modal'
 
 import PTlogo from './Lotties/PTLogo.json'
 import RightArrow from './images/right-arrows.png'
@@ -14,352 +15,334 @@ import RightArrow from './images/right-arrows.png'
 
 function PokeGrid() {
 
-    const container = useRef(null)
+	const container = useRef(null)
 
-    const [shinySprite, setShinySprite] = useState(false)
+	const [shinySprite, setShinySprite] = useState(false)
 
-    const [board, setBoard] = useState([])
+	const [board, setBoard] = useState([])
 
-    const [shinyContainer, setshinyContainer] = useState(false)
+	const [shinyContainer, setshinyContainer] = useState(false)
 
-    const [maxPokes, setMaxPokes] = useState(false)
+	const [maxPokes, setMaxPokes] = useState(false)
 
-    const getPokemons = async () => {
-        const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=150")
-        const data = await response.json()
-      
-        return data
-    }
-      
-    const getPokemon = async (url) => {
-        const response = await fetch(url)
-        const data = await response.json()
-        
-        return data
-    }
+	const getPokemons = async () => {
+		const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=150')
+		const data = await response.json()
 
-    const toggleShinySprite = () => {
-        setShinySprite(!shinySprite)
-    }
+		return data
+	}
 
-    useEffect(() => {
-        const delay = setTimeout(() => {
-            if(container.current === true) {
-                return null
-            }
-                lottie.loadAnimation({
-                    container: container.current,
-                    animationData: PTlogo,
-                    loop: false,
-                    autoplay: true
-                })
-        }, 2000)
-        return () => clearTimeout(delay)
-      }, []) 
+	const getPokemon = async (url) => {
+		const response = await fetch(url)
+		const data = await response.json()
 
-      useEffect(() => {
-        setTimeout(() => {
-            setshinyContainer(true)
-        }, 4000)
-      })
+		return data
+	}
 
-      useEffect(() => {
-          if(board.length > 6) {
-              console.log('Max Pokes')
-              setMaxPokes(true)
-          }
-      }, [board.length])
+	const toggleShinySprite = () => {
+		setShinySprite(!shinySprite)
+	}
 
-      const [{isOver}, drop] = useDrop(() => ({
-        accept: 'DIV',
-        drop: (item) => addDivToBoard(item),
-        collect: (monitor) => ({
-            isOver: !!monitor.isOver(),
-        }),
-    }))
+	useEffect(() => {
+		const delay = setTimeout(() => {
+			if(container.current === true) {
+				return null
+			}
+			lottie.loadAnimation({
+				container: container.current,
+				animationData: PTlogo,
+				loop: false,
+				autoplay: true
+			})
+		}, 2000)
+		return () => clearTimeout(delay)
+	}, [])
 
-    const addDivToBoard = async (name) => {
-        // console.log(board.length);
-        
-       setBoard((board) => [...board, name])
-    }
+	useEffect(() => {
+		setTimeout(() => {
+			setshinyContainer(true)
+		}, 4000)
+	})
 
-    const deleteTeam = () => {
-        setBoard(board.slice(0, board))
-        setMaxPokes(false)
-    }
+	useEffect(() => {
+		if(board.length > 6) {
+			console.log('Max Pokes')
+			setMaxPokes(true)
+		}
+	}, [board.length])
 
-    
-    const PokemonTile = ({ name, url }) => {
+	const [{isOver}, drop] = useDrop(() => ({
+		accept: 'DIV',
+		drop: (item) => addDivToBoard(item),
+		collect: (monitor) => ({isOver: !!monitor.isOver()}),
+	}))
 
-    const [{isDragging}, drag] = useDrag(() => ({
-        type: 'DIV',
-        item: {name: name, url: url},
-        collect: (monitor) => ({
-            isDragging: !!monitor.isDragging(),
-        }),
-    }))
+	const addDivToBoard = async (name) => {
+		// console.log(board.length);
 
-    const { error, isLoading, data } = useQuery(`pokemon${name}`, () =>
-        getPokemon(url)
-    )
-    
-    if (error) {
-        return <div>Error: {error}</div>
-    }
-    
-    if (isLoading) {
-        return (
-        <div>Loading...</div>
-        )
-    }
+		setBoard((board) => [...board, name])
+	}
 
-    const {
-        id: index
-    } = data
-    
-    const {
-        sprites: { front_shiny }
-    } = data
+	const deleteTeam = () => {
+		setBoard(board.slice(0, ...board))
+		setMaxPokes(false)
+	}
 
-    const {
-        sprites: { front_default }
-    } = data
 
-    const {
-        types: [{
-            type: { name: type }
-        }]
-    } = data
+	const PokemonTile = ({name, url}) => {
 
-    const {
-        abilities: [{
-            ability: { name: ability }
-        }]
-    } = data
+		const [{isDragging}, drag] = useDrag(() => ({
+			type: 'DIV',
+			item: {name: name, url: url},
+			collect: (monitor) => ({isDragging: !!monitor.isDragging()}),
+		}))
 
-    const {
-        moves: [ 
-            {move: {name: attack}}
-        ]
-    } = data
+		const {error, isLoading, data} = useQuery(`pokemon${name}`, () =>
+			getPokemon(url)
+		)
 
-    const style = `type-styler ${type}`
-    
-    return (        
-        <div
-        className={style}
-        ref={drag}
-        style={{ border: isDragging ? '5px dashed red' : '0px'}}
-        onDrag={(e) => {
-            console.log(front_default)
-        }}
-        onClick={(e) => {
-            console.log(front_default)
-        }}
-        >
-            <div>
-                <small className='poke-id'>id: {index}</small>
-            </div>
-            {shinySprite ?
-            <div className='poke-sprite'>
-                <img src={front_shiny} alt={name} />
-            </div>
-            : 
-            <div className='poke-sprite'>
-                <img src={front_default} alt={name} />
-            </div>
-            }
-            <div>
-                {name.toUpperCase()}
-            </div>
-            <div>
+		if(error) {
+			return <div>Error: {error}</div>
+		}
+
+		if(isLoading) {
+			return (
+				<div>Loading...</div>
+			)
+		}
+
+		const {id: index} = data
+
+		// eslint-disable-next-line camelcase
+		const {sprites: {front_shiny}} = data
+
+		// eslint-disable-next-line camelcase
+		const {sprites: {front_default}} = data
+
+		const {types: [{type: {name: type}}]} = data
+
+		const {abilities: [{ability: {name: ability}}]} = data
+
+		const {
+			moves: [
+				{move: {name: attack}}
+			]
+		} = data
+
+		const style = `type-styler ${type}`
+
+		return (
+			<div
+				className={style}
+				ref={drag}
+				style={{border: isDragging ? '5px dashed red' : '0px'}}
+				onDrag={(e) => {
+					console.log(front_default)
+				}}
+				onClick={(e) => {
+					console.log(front_default)
+				}}
+			>
+				<div>
+					<small className='poke-id'>id: {index}</small>
+				</div>
+				{shinySprite ?
+					<div className='poke-sprite'>
+						{/* eslint-disable-next-line camelcase */}
+						<img src={front_shiny} alt={name} />
+					</div>
+					:
+					<div className='poke-sprite'>
+						{/* eslint-disable-next-line camelcase */}
+						<img src={front_default} alt={name} />
+					</div>
+				}
+				<div>
+					{name.toUpperCase()}
+				</div>
+				<div>
                 Type: {type}
-            </div>
-            <div>
+				</div>
+				<div>
                 Ability: {ability}
-            </div>
-            <div>
+				</div>
+				<div>
                 Attack: {attack}
-            </div>
-            <button onClick={() => console.log(data)}>DATA</button>
-        </div>
-        );
-    };
+				</div>
+				<button onClick={() => console.log(data)}>DATA</button>
+			</div>
+		)
+	}
 
-    const DroppedPoke = ({ name, url }) => {
+	const DroppedPoke = ({name, url}) => {
 
-        const { error, isLoading, data } = useQuery(`pokemon${name}`, () =>
-            getPokemon(url)
-        )
-        
-        if (error) {
-            return <div>Error: {error}</div>
-        }
-        
-        if (isLoading) {
-            return (
-            <div>Loading...</div>
-            )
-        }
+		const {error, isLoading, data} = useQuery(`pokemon${name}`, () =>
+			getPokemon(url)
+		)
 
-        const {
-            sprites: { front_shiny }
-        } = data
-    
-        // const {
-        //     sprites: { front_default }
-        // } = data
+		if(error) {
+			return <div>Error: {error}</div>
+		}
 
-        const {
-            sprites: {
-                other: {
-                    'official-artwork': { front_default }
-                }
-            }
-        } = data
-    
-        return (
-            <div>
-                {shinySprite ?
-                <div className='poke-sprite-board'>
-                    <img src={front_shiny} alt={name} />
-                </div>
-                : 
-                <div className='poke-sprite-board'>
-                    <img src={front_default} alt={name} />
-                </div>
-                }
-            </div>
-            )
-        };
+		if(isLoading) {
+			return (
+				<div>Loading...</div>
+			)
+		}
+
+		// eslint-disable-next-line camelcase
+		const {sprites: {front_shiny}} = data
+
+		// const {
+		//     sprites: { front_default }
+		// } = data
+
+		// eslint-disable-next-line camelcase
+		const {sprites: {other: {'official-artwork': {front_default}}}} = data
+
+		return (
+			<div>
+				{shinySprite ?
+					<div className='poke-sprite-board'>
+						{/* eslint-disable-next-line camelcase */}
+						<img src={front_shiny} alt={name} />
+					</div>
+					:
+					<div className='poke-sprite-board'>
+						{/* eslint-disable-next-line camelcase */}
+						<img src={front_default} alt={name} />
+					</div>
+				}
+			</div>
+		)
+	}
 
 
+	const {error, isLoading, data} = useQuery('pokemons', getPokemons)
 
-    const { error, isLoading, data } = useQuery("pokemons", getPokemons);
+	if(error) {
+		return <div>Error: {error}</div>
+	}
 
-    if (error) {
-        return <div>Error: {error}</div>
-    }
+	if(isLoading) {
+		return (
+			<div>Loading...</div>
+		)
+	}
 
-    if (isLoading) {
-        return (
-            <div>Loading...</div>
-        )
-    }
-
-    const { results: pokemons } = data
+	const {results: pokemons} = data
 
 
-    return (
-        <div>
-            <div className='title-wrapper'>
-                <div className='title'>
-                {!shinyContainer ?
-                <h1 className='lottie-placeholder'>
-                    <div></div>
-                </h1>
-                :
-                <div className='shiny-toggle'>
-                    <div className='shiny-toggle-btn'>
-                        {shinySprite ?
-                        <div>Normal Poke's</div>
-                        :
-                        <div>Shiny Poke's</div>
-                        }
-                    </div>
-                    <img src={RightArrow} alt='Right arrow' />
-                    <label className="switch">
-                        <input type="checkbox" 
-                            onClick={toggleShinySprite}
-                        />
-                        <span className="slider"></span>
-                    </label>
-                </div>
-                }
-                    {isLoading ?
-                    <h1 className='lottie-placeholder'>
-                        <div></div>
-                    </h1>
-                    :
-                    <h1>
-                        <div 
-                        //Lottie
-                            ref={container}
-                        />
-                    </h1>
-                    }
-                </div>
-                <div className='header-line'/>
-            </div>
-            <div className='background-wrapper'>
-                <div className='structure-flex'>
-                    <div className='box1'>
-                        <div className='grid-wrapper'>
-                            {pokemons.map((pokemon) => (
-                            <div key={pokemon.name} className='poke-card-wrapper'>
-                                <div 
-                                className='poke-card'
-                                onDragStart={(e) => {
-                                }}
-                                >
-                                <PokemonTile
-                                    {...pokemon}
-                                />
-                                </div>
-                            </div>
-                        ))}
-                        </div>
-                </div>
-                 <div className='box2'>
-                    <div
-                    style={{border: isOver ? '10px solid white' : '4px solid'}}
-                    className='drawer-wrapper'
-                    ref={drop}
-                    onDrop={(e) => {
-                        // handleMaxAdded()
-                    }}
-                    >
-                        <div className='board-title'>
+	return (
+		<div>
+			<div className='title-wrapper'>
+				<div className='title'>
+					{!shinyContainer ?
+						<h1 className='lottie-placeholder'>
+							<div></div>
+						</h1>
+						:
+						<div className='shiny-toggle'>
+							<div className='shiny-toggle-btn'>
+								{shinySprite ?
+									<div>Normal Poke's</div>
+									:
+									<div>Shiny Poke's</div>
+								}
+							</div>
+							<img src={RightArrow} alt='Right arrow' />
+							<label className='switch'>
+								<input type='checkbox'
+									onClick={toggleShinySprite}
+								/>
+								<span className='slider'></span>
+							</label>
+						</div>
+					}
+					{isLoading ?
+						<h1 className='lottie-placeholder'>
+							<div></div>
+						</h1>
+						:
+						<h1>
+							<div
+								//Lottie
+								ref={container}
+							/>
+						</h1>
+					}
+				</div>
+				<div className='header-line'/>
+			</div>
+			<div className='background-wrapper'>
+				<div className='structure-flex'>
+					<div className='box1'>
+						<div className='grid-wrapper'>
+							{pokemons.map((pokemon) => (
+								<div key={pokemon.name} className='poke-card-wrapper'>
+									<div
+										className='poke-card'
+										onDragStart={(e) => {
+										}}
+									>
+										<PokemonTile
+											{...pokemon}
+										/>
+									</div>
+								</div>
+							))}
+						</div>
+					</div>
+					<div className='box2'>
+						<div
+							style={{border: isOver ? '10px solid white' : '4px solid'}}
+							className='drawer-wrapper'
+							ref={drop}
+							onDrop={(e) => {
+								// handleMaxAdded()
+							}}
+						>
+							<div className='board-title'>
                             Assemble your Team!
-                        </div>
-                        {maxPokes ?
-                            <div className='max-poke-warning'>
-                                <div className='max-warning-text'>
+							</div>
+							{maxPokes ?
+								<div className='max-poke-warning'>
+									<div className='max-warning-text'>
+										{/* eslint-disable-next-line react/no-unescaped-entities */}
                                     The max number of Poke's in a team is 6.
-                                </div>
-                                <i className='close-icon'></i>
-                            </div>
-                        : null
-                        }
-                        <div className='delete-wrapper'>
-                            <button className='delete-btn'
-                                onClick={deleteTeam}
-                            >
-                            </button>
-                        </div>
-                        <div ref={drop} className='poke-member-container'>
-                            {board.map((pokemon, index) => {
-                                return (
-                                    <div>
-                                    {/* {board.length === 2 ? */}
-                                    <div key={index}>
-                                       <DroppedPoke {...pokemon} />
-                                    </div>
-                                    {/* : 
+									</div>
+									<i className='close-icon'></i>
+								</div>
+								: null
+							}
+							<div className='delete-wrapper'>
+								<button className='delete-btn'
+									onClick={deleteTeam}
+								>
+								</button>
+							</div>
+							<div ref={drop} className='poke-member-container'>
+								{board.map((pokemon, index) => {
+									return (
+										<div key={index}>
+											{/* {board.length === 2 ? */}
+											<div>
+												<DroppedPoke {...pokemon} />
+											</div>
+											{/* :
                                     null
                                     } */}
-                                    </div>
-                                )
-                            })}                  
-                        </div>
-                    </div>
-                </div>
-                </div>
-            </div>
+										</div>
+									)
+								})}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
-        </div>
-    )
+		</div>
+	)
 }
 
 export default PokeGrid
