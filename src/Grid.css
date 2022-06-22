@@ -313,4 +313,12 @@
 		margin-top: 50px;
 	}
 
+	.poke-sprite img {
+		width: 100px;
+	}
+
+	.poke-sprite-board img {
+		width: 110px;
+	}
+
 }

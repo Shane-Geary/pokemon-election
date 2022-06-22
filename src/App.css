@@ -281,5 +281,72 @@ input:checked + .slider:before {
 		justify-content: center;
 		align-items: center;
 	}
+
+	.board-title {
+		margin-top: 10%;
+		font-size: small;
+	}
+
+	.delete-wrapper {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+	}
+	
+	.delete-btn {
+		background-image: url(/src/images/trash-icon.png);
+		background-repeat: no-repeat;
+		background-size: 40px;
+		width: 40px;
+		height: 40px;
+		cursor: pointer;
+		border: none;
+		border-radius: 40px;
+	}
+
+	.poke-member-container {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		  gap: 5px;
+		grid-auto-rows: 150px;
+		grid-row: 1 3;
+		height: 1025vh;
+		margin-top: 50px;
+		overflow: hidden;
+	}
+
+	.max-poke-warning {
+		background-color: rgba(0, 0, 0, 0.324);
+		color: white;
+		border: 2px solid red;
+		border-radius: 20px;
+		position: relative;
+		top: 5%;
+		left: 5%;
+		width: 90%;
+		height: 5%;
+		text-align: center;
+	}
+	
+	.max-warning-text {
+		font-size: 13px;
+		text-align: center;
+		position: absolute;
+		top: 25%;
+		right: 12%;
+	}
+	
+	.close-icon {
+		background-image: url(/src/images/close-icon.png);
+		background-repeat: no-repeat;
+		background-size: 20px;
+		width: 20px;
+		height: 20px;
+		cursor: pointer;
+		border: none;
+		position: absolute;
+		top: 13%;
+		right: 2%;
+	}
 	
 }
