@@ -7,7 +7,7 @@ import {useQuery} from 'react-query'
 import lottie from 'lottie-web'
 import {useDrag} from 'react-dnd'
 import {useDrop} from 'react-dnd'
-// import Modal from '@mui/material/Modal'
+import {Modal} from '@mui/material'
 
 import PTlogo from './Lotties/PTLogo.json'
 import RightArrow from './images/right-arrows.png'
@@ -24,6 +24,8 @@ function PokeGrid() {
 	const [shinyContainer, setshinyContainer] = useState(false)
 
 	const [maxPokes, setMaxPokes] = useState(false)
+
+	const [modalOpen, setModalOpen] = useState(false)
 
 	const getPokemons = async () => {
 		const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=150')
@@ -86,6 +88,10 @@ function PokeGrid() {
 	const deleteTeam = () => {
 		setBoard(board.slice(0, ...board))
 		setMaxPokes(false)
+	}
+
+	const handleOpen = () => {
+		setModalOpen(true)
 	}
 
 
@@ -321,10 +327,32 @@ function PokeGrid() {
 							}
 							<div className='delete-wrapper'>
 								<button className='delete-btn'
-									onClick={deleteTeam}
+									onClick={() => setModalOpen(true)}
 								>
 								</button>
 							</div>
+							<Modal
+								open={modalOpen}
+								aria-labelledby='modal-modal-title'
+								// onClose={() => setModalOpen(false)}
+								// forwardRef={modalRef}
+								style={{
+									top: '50%',
+									left: '50%',
+									transform: 'translate(-50%, -50%)',
+								}}
+							>
+								<div
+									style={{
+										postition: 'absolute',
+										top: '10%',
+										left: '50%',
+										// transform: 'translate(-50%, -50%)',
+									}}
+								>
+									Delete Current Team?
+								</div>
+							</Modal>
 							<div ref={drop} className='poke-member-container'>
 								{board.map((pokemon, index) => {
 									return (
