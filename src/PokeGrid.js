@@ -89,7 +89,7 @@ function PokeGrid() {
 		setBoard(board.slice(0, ...board))
 		setMaxPokes(false)
 	}
- 
+
 	const handleClose = () => {
 		setModalOpen(false)
 	}
@@ -325,12 +325,15 @@ function PokeGrid() {
 								</div>
 								: null
 							}
-							<div className='delete-wrapper'>
-								<button className='delete-btn'
-									onClick={() => setModalOpen(true)}
-								>
-								</button>
-							</div>
+							{board.length > 0 ?
+								<div className='delete-wrapper'>
+									<button className='delete-btn'
+										onClick={() => setModalOpen(true)}
+									>
+									</button>
+								</div>
+								: null
+							}
 							<Modal
 								open={modalOpen}
 								onClose={(_, reason) => {
@@ -366,7 +369,8 @@ function PokeGrid() {
 											top: '55%',
 											left: '15%',
 											borderRadius: '20px',
-											cursor: 'pointer'
+											cursor: 'pointer',
+											color: 'rgba(255, 0, 0, 0.89)'
 										}}
 										onClick={() => {
 											deleteTeam()
