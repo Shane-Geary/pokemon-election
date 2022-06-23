@@ -89,9 +89,9 @@ function PokeGrid() {
 		setBoard(board.slice(0, ...board))
 		setMaxPokes(false)
 	}
-
-	const handleOpen = () => {
-		setModalOpen(true)
+ 
+	const handleClose = () => {
+		setModalOpen(false)
 	}
 
 
@@ -333,24 +333,60 @@ function PokeGrid() {
 							</div>
 							<Modal
 								open={modalOpen}
+								onClose={(_, reason) => {
+									if(reason !== 'backdropClick') {
+										handleClose()
+									}
+								}}
 								aria-labelledby='modal-modal-title'
 								// onClose={() => setModalOpen(false)}
 								// forwardRef={modalRef}
-								style={{
-									top: '50%',
-									left: '50%',
+								sx={{
+									top: '20%',
+									left: '88%',
 									transform: 'translate(-50%, -50%)',
+									width: '12vw',
+									height: '9vh'
 								}}
+								BackdropProps={{style: {backgroundColor: 'whitesmoke', borderRadius: '20px'}}}
 							>
-								<div
-									style={{
-										postition: 'absolute',
-										top: '10%',
-										left: '50%',
-										// transform: 'translate(-50%, -50%)',
-									}}
-								>
-									Delete Current Team?
+								<div>
+									<div
+										style={{
+											display: 'flex',
+											justifyContent: 'center',
+											marginTop: '20px'
+										}}
+									>
+										Delete Current Team?
+									</div>
+									<button
+										style={{
+											position: 'absolute',
+											top: '55%',
+											left: '15%',
+											borderRadius: '20px',
+											cursor: 'pointer'
+										}}
+										onClick={() => {
+											deleteTeam()
+											setModalOpen(false)
+										}}
+									>
+										Delete
+									</button>
+									<button
+										style={{
+											position: 'absolute',
+											top: '55%',
+											left: '60%',
+											borderRadius: '20px',
+											cursor: 'pointer'
+										}}
+										onClick={() => setModalOpen(false)}
+									>
+										Cancel
+									</button>
 								</div>
 							</Modal>
 							<div ref={drop} className='poke-member-container'>
