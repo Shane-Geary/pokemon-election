@@ -8,6 +8,8 @@ import lottie from 'lottie-web'
 import {useDrag} from 'react-dnd'
 import {useDrop} from 'react-dnd'
 import {Modal} from '@mui/material'
+import {Button} from '@mui/material'
+import {createTheme, ThemeProvider} from '@mui/material/styles'
 
 import PTlogo from './Lotties/PTLogo.json'
 import RightArrow from './images/right-arrows.png'
@@ -26,6 +28,8 @@ function PokeGrid() {
 	const [maxPokes, setMaxPokes] = useState(false)
 
 	const [modalOpen, setModalOpen] = useState(false)
+
+	// const [draggedStyle, setDraggedStyle] = useState({PointerEvent: 'none'})
 
 	const getPokemons = async () => {
 		const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=150')
@@ -94,6 +98,19 @@ function PokeGrid() {
 		setModalOpen(false)
 	}
 
+	const theme = createTheme({
+		palette: {
+			primary: {
+			  main: '#0971f1',
+			  darker: '#053e85',
+			},
+			neutral: {
+				main: '#64748B',
+				contrastText: '#fff',
+			  }
+		}
+	})
+
 
 	const PokemonTile = ({name, url}) => {
 
@@ -141,7 +158,10 @@ function PokeGrid() {
 			<div
 				className={style}
 				ref={drag}
-				style={{border: isDragging ? '5px dashed red' : '0px'}}
+				style={{
+					border: isDragging ? '5px dashed red' : '0px',
+					pointerEvents: isDragging ? 'none' : {}
+				}}
 				onDrag={(e) => {
 					console.log(front_default)
 				}}
@@ -197,28 +217,14 @@ function PokeGrid() {
 		}
 
 		// eslint-disable-next-line camelcase
-		const {sprites: {front_shiny}} = data
-
-		// const {
-		//     sprites: { front_default }
-		// } = data
-
-		// eslint-disable-next-line camelcase
 		const {sprites: {other: {'official-artwork': {front_default}}}} = data
 
 		return (
 			<div>
-				{shinySprite ?
-					<div className='poke-sprite-board'>
-						{/* eslint-disable-next-line camelcase */}
-						<img src={front_shiny} alt={name} />
-					</div>
-					:
-					<div className='poke-sprite-board'>
-						{/* eslint-disable-next-line camelcase */}
-						<img src={front_default} alt={name} />
-					</div>
-				}
+				<div className='poke-sprite-board'>
+					{/* eslint-disable-next-line camelcase */}
+					<img src={front_default} alt={name} />
+				</div>
 			</div>
 		)
 	}
@@ -309,7 +315,7 @@ function PokeGrid() {
 							}}
 						>
 							<div className='board-title'>
-                            Assemble your Team!
+                            Assemble Your Team!
 							</div>
 							{maxPokes ?
 								<div className='max-poke-warning'>
@@ -363,14 +369,18 @@ function PokeGrid() {
 									>
 										Delete Current Team?
 									</div>
-									<button
+									<Button
+										variant='contained'
+										color='error'
+										size='small'
 										style={{
 											position: 'absolute',
 											top: '55%',
-											left: '15%',
+											left: '10%',
 											borderRadius: '20px',
 											cursor: 'pointer',
-											color: 'rgba(255, 0, 0, 0.89)'
+											// color: 'rgba(255, 0, 0, 0.89)',
+											// backgroundColor: 'lightgray'
 										}}
 										onClick={() => {
 											deleteTeam()
@@ -378,19 +388,24 @@ function PokeGrid() {
 										}}
 									>
 										Delete
-									</button>
-									<button
-										style={{
-											position: 'absolute',
-											top: '55%',
-											left: '60%',
-											borderRadius: '20px',
-											cursor: 'pointer'
-										}}
-										onClick={() => setModalOpen(false)}
-									>
+									</Button>
+									<ThemeProvider theme={theme}>
+										<Button
+											variant='outlined'
+											size='small'
+											color='neutral'
+											sx={{
+												position: 'absolute',
+												top: '55%',
+												left: '60%',
+												borderRadius: '20px',
+												cursor: 'pointer'
+											}}
+											onClick={() => setModalOpen(false)}
+										>
 										Cancel
-									</button>
+										</Button>
+									</ThemeProvider>
 								</div>
 							</Modal>
 							<div ref={drop} className='poke-member-container'>
