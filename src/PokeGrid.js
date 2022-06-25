@@ -7,9 +7,11 @@ import {useQuery} from 'react-query'
 import lottie from 'lottie-web'
 import {useDrag} from 'react-dnd'
 import {useDrop} from 'react-dnd'
+
 import {Modal} from '@mui/material'
 import {Button} from '@mui/material'
 import {createTheme, ThemeProvider} from '@mui/material/styles'
+import HelpIcon from '@material-ui/icons/Help'
 
 import PTlogo from './Lotties/PTLogo.json'
 import RightArrow from './images/right-arrows.png'
@@ -27,7 +29,7 @@ function PokeGrid() {
 
 	const [maxPokes, setMaxPokes] = useState(false)
 
-	const [modalOpen, setModalOpen] = useState(false)
+	const [deleteModalOpen, setDeleteModalOpen] = useState(false)
 
 	// const [draggedStyle, setDraggedStyle] = useState({PointerEvent: 'none'})
 
@@ -95,7 +97,7 @@ function PokeGrid() {
 	}
 
 	const handleClose = () => {
-		setModalOpen(false)
+		setDeleteModalOpen(false)
 	}
 
 	const theme = createTheme({
@@ -306,6 +308,18 @@ function PokeGrid() {
 						</div>
 					</div>
 					<div className='box2'>
+						<div style={{
+							position: 'relative',
+							top: '5vh',
+							left: '9vw',
+							fontSize: '80px'
+						}}>
+							<HelpIcon
+								fontSize='inherit'
+								color='error'
+								sx={{color: 'red'}}
+							/>
+						</div>
 						<div
 							style={{border: isOver ? '10px solid white' : '4px solid'}}
 							className='drawer-wrapper'
@@ -334,21 +348,21 @@ function PokeGrid() {
 							{board.length > 0 ?
 								<div className='delete-wrapper'>
 									<button className='delete-btn'
-										onClick={() => setModalOpen(true)}
+										onClick={() => setDeleteModalOpen(true)}
 									>
 									</button>
 								</div>
 								: null
 							}
 							<Modal
-								open={modalOpen}
+								open={deleteModalOpen}
 								onClose={(_, reason) => {
 									if(reason !== 'backdropClick') {
 										handleClose()
 									}
 								}}
 								aria-labelledby='modal-modal-title'
-								// onClose={() => setModalOpen(false)}
+								// onClose={() => setDeleteModalOpen(false)}
 								// forwardRef={modalRef}
 								sx={{
 									top: '20%',
@@ -378,13 +392,11 @@ function PokeGrid() {
 											top: '55%',
 											left: '10%',
 											borderRadius: '20px',
-											cursor: 'pointer',
-											// color: 'rgba(255, 0, 0, 0.89)',
-											// backgroundColor: 'lightgray'
+											cursor: 'pointer'
 										}}
 										onClick={() => {
 											deleteTeam()
-											setModalOpen(false)
+											setDeleteModalOpen(false)
 										}}
 									>
 										Delete
@@ -401,7 +413,7 @@ function PokeGrid() {
 												borderRadius: '20px',
 												cursor: 'pointer'
 											}}
-											onClick={() => setModalOpen(false)}
+											onClick={() => setDeleteModalOpen(false)}
 										>
 										Cancel
 										</Button>
