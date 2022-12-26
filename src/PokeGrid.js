@@ -362,13 +362,11 @@ function PokeGrid() {
 									}
 								}}
 								aria-labelledby='modal-modal-title'
-								// onClose={() => setDeleteModalOpen(false)}
-								// forwardRef={modalRef}
 								sx={{
 									top: '20%',
 									left: '88%',
 									transform: 'translate(-50%, -50%)',
-									width: '12vw',
+									width: '20%',
 									height: '9vh'
 								}}
 								BackdropProps={{style: {backgroundColor: 'whitesmoke', borderRadius: '20px'}}}
@@ -378,7 +376,7 @@ function PokeGrid() {
 										style={{
 											display: 'flex',
 											justifyContent: 'center',
-											marginTop: '20px'
+											marginTop: '8px'
 										}}
 									>
 										Delete Current Team?
@@ -388,11 +386,12 @@ function PokeGrid() {
 										color='error'
 										size='small'
 										style={{
-											position: 'absolute',
-											top: '55%',
+											position: 'relative',
 											left: '10%',
 											borderRadius: '20px',
-											cursor: 'pointer'
+											cursor: 'pointer',
+											width: '10%',
+											fontSize: '12px',
 										}}
 										onClick={() => {
 											deleteTeam()
@@ -407,11 +406,13 @@ function PokeGrid() {
 											size='small'
 											color='neutral'
 											sx={{
-												position: 'absolute',
-												top: '55%',
-												left: '60%',
+												position: 'relative',
+												// top: '50%',
+												left: '45%',
 												borderRadius: '20px',
-												cursor: 'pointer'
+												cursor: 'pointer',
+												width: '10%',
+												fontSize: '12px'
 											}}
 											onClick={() => setDeleteModalOpen(false)}
 										>

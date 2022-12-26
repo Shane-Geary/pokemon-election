@@ -307,11 +307,11 @@ input:checked + .slider:before {
 	.poke-member-container {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
-		  gap: 5px;
+		gap: 5px;
 		grid-auto-rows: 150px;
 		grid-row: 1 3;
 		height: 1025vh;
-		margin-top: 50px;
+		margin-top: 25px;
 		overflow: hidden;
 	}
 
@@ -321,7 +321,7 @@ input:checked + .slider:before {
 		border: 2px solid red;
 		border-radius: 20px;
 		position: relative;
-		top: 5%;
+		top: 2%;
 		left: 5%;
 		width: 90%;
 		height: 5%;
